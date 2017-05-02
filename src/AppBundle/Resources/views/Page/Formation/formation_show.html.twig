@@ -1,0 +1,170 @@
+{% extends 'AppBundle::Page/Formation/formation.html.twig' %}
+
+{% block sidebar_nav %}
+	<h2><em><a href="javascript:history.go(-1)">Retour</a></em></h2>
+	{{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+	<script type="text/javascript" src="{{ asset('bundles/appcofidur/js/d3.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('bundles/appcofidur/js/d3.tip.js') }}"></script>
+
+	<h1>Affichage d'une formation</h1>
+
+{% set AERONAUTIC= 1 %}
+{% set ALUMINIUM= 2 %}
+{% set PCB= 3 %}
+{% set EMS= 4 %}
+{% set ENVIRONMENT= 5 %}
+{% set ECOLOGY= 6 %}
+
+	<table class="category_page">
+		<tr>
+			<th class="entete_category">Nom</th><td class="formationName">{{ formation.reference }} -- {{ formation.name }} </td>
+		</tr>
+		<tr>
+			<th class="entete_category">Secteur et Type</th><td>{{ formation.sector }} -- {{ formation.type }}</td>
+		</tr>
+		<tr>
+			<th class="entete_category">Objectif</th><td>{{ formation.goal }} </td>
+		</tr>
+		<tr>
+			<th class="entete_category">Moyens pédagogiques</th><td>{{ formation.teachingAids }} </td>
+		</tr>
+		<tr>
+			<th class="entete_category">Lieu & moyens matériels</th><td>{{ formation.placesMaterialRessources }} </td>
+		</tr>
+		<tr>
+			<th class="entete_category">Temps de validation</th><td>{{ formation.validityTime }} </td>
+		</tr>
+		<tr>
+			<th class="entete_category">Criticité</th><td>{{ formation.criticality }} </td>
+		</tr>
+		<tr>
+			<th class="entete_category">Habilitées / habilitées à former</th><td> {{ nbFormed }} ({{ nbFormedTot }}) / {{ nbFormer }} ({{ nbFormerTot }}) </td>
+		</tr>
+	</table>
+
+	<br>
+	<h2>Evolutions des opérateurs</h3>
+	<div id="graph"></div>
+
+		<script>
+			var margin = {top: 20, right: 20, bottom: 30, left: 50},
+			width = 960 - margin.left - margin.right,
+			height = 500 - margin.top - margin.bottom;
+
+			var parseDate = d3.time.format("%d-%b-%y").parse;
+
+			var x = d3.time.scale()
+			  .range([0, width]);
+
+
+			var y = d3.scale.linear()
+			  .range([height, 0]);
+
+			var xAxis = d3.svg.axis()
+			  .scale(x)
+			  .orient("bottom");
+
+			var yAxis = d3.svg.axis()
+			  .scale(y)
+			  .tickFormat(d3.format("d"))
+			  .orient("left");
+
+			var area = d3.svg.area()
+			  .x(function(d) { return x(d.date); })
+			  .y0(height)
+			  .y1(function(d) { return y(d.operator); });
+
+			var svg = d3.select("#graph").append("svg")
+			  .attr("width", width + margin.left + margin.right)
+			  .attr("height", height + margin.top + margin.bottom)
+			  .append("g")
+			  .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+			d3.tsv("{{ asset('uploads/data/data_' ~ formation.id ~ '.tsv') }}", function(error, data) {
+			if (error) throw error;
+
+			data.forEach(function(d) {
+				d.date = parseDate(d.date);
+				d.operator = +d.operator;
+			});
+
+			x.domain(d3.extent(data, function(d) { return d.date; }));
+			y.domain([0, d3.max(data, function(d) { return d.operator; })]);
+
+			svg.append("path")
+			  .datum(data)
+			  .attr("class", "area")
+			  .attr("d", area);
+
+			svg.append("g")
+			  .attr("class", "x axis")
+			  .attr("transform", "translate(0," + height + ")")
+			  .call(xAxis)
+			.append("text")
+			  .attr("x", width)
+			  .attr("y", -10)
+			  .attr("dx", ".71em")
+			  .style("text-anchor", "end")
+			  .text("Temps");
+
+			svg.append("g")
+			  .attr("class", "y axis")
+			  .call(yAxis)
+			.append("text")
+			  .attr("transform", "rotate(-90)")
+			  .attr("y", 6)
+			  .attr("dy", ".71em")
+			  .style("text-anchor", "end")
+			  .text("Opérateurs");
+			});
+		</script>
+
+	{% for category in formation.categories %}
+		{% include 'AppBundle::Page/Category/category_show.html.twig' %}
+    {% endfor %}
+{% endblock %}
+
+{% block sidebar_container %}
+	{% if is_granted('ROLE_ADMIN') %}
+        {{ parent() }}
+    {% endif %}
+{% endblock sidebar_container %}
+
+{% block sidebar %}
+	{% if is_granted('ROLE_ADMIN') %}
+
+		<fieldset class="category">
+			<legend class="category_title">
+				<div>
+					Formation :
+				</div>
+			</legend>
+			<ul>
+				<li>
+					<input type="button" value="Editer" onclick="{window.location.href='{{ path('AppBundle_formation_edit', {'idForm': formation.id}) }}'}">
+				</li>
+				<li>
+					<input type="button" value="Supprimer"
+						   onclick="if(confirm('Supprimer la formation ?')){
+								   window.location.href='{{ path('AppBundle_formation_delete', {'idForm': formation.id}) }}'
+								   }">
+				</li>
+			</ul>
+		</fieldset>
+		<fieldset class="category">
+			<legend class="category_title">
+				Catégorie :
+			</legend>
+			<ul>
+				<li>
+					<a href="{{ path('AppBundle_category_add', {'idForm': formation.id}) }}">Ajouter une catégorie</a>
+				</li>
+			</ul>
+		</fieldset>
+
+    {% endif %}
+{% endblock sidebar %}

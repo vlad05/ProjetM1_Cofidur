@@ -1,0 +1,44 @@
+{% extends 'AppBundle::Page/Operator/operator.html.twig' %}
+
+{% block body %}
+	<h1>Affichage de tous les opérateurs</h1>
+
+<script src="{{ asset('bundles/appcofidur/js/sorttable.js') }}"></script>
+
+	<input type="button" value="Ajouter un opérateur" onclick="{window.location.href='{{ path('AppBundle_operator_add') }}'}">
+	<br/>
+	<br/>
+
+	<table class="sortable">
+	<tr>
+        <th>MAT.</th>
+		<th> NOM D'UTILISATEUR </th>
+        <th> PRENOM </th>
+        <th> NOM </th>
+		 <th> DATE DE NAISSANCE </th>
+	</tr>
+{% for operator in operators %}
+	<tr>
+		<td> {{ operator.registrationNumber }} </td>
+        <td>
+			<a href="{{ path('AppBundle_operator_show', {'idOp': operator.id}) }}">
+				{{ operator.username }}
+			</a>
+		</td>
+		<td> {{ operator.firstName }} </td>
+        <td> {{ operator.lastName }} </td>
+         <td> {{ operator.dateOfBirth |date("d/m/Y") }} </td>
+		<td>
+			<input type="button" value="Editer" onclick="{window.location.href='{{ path('AppBundle_operator_edit', {'idOp': operator.id}) }}'}">
+		</td>
+		<td>
+			<input type="button" value="Supprimer"
+				   onclick="if(confirm('Supprimer l\'operateur?')){
+						   window.location.href='{{ path('AppBundle_operator_delete', {'idOp': operator.id}) }}'
+						   }">
+		</td>
+	</tr>
+{% endfor %}
+</table>
+
+{% endblock %}

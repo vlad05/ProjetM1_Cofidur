@@ -1,0 +1,299 @@
+#===== ROUTING =====#
+
+### Pages générales ###
+AppBundle_homepage:
+    path:  /
+    methods: [GET]
+    defaults: { _controller: AppBundle:Page:index }
+
+AppBundle_about:
+    path:  /about
+    methods: [GET]
+    defaults: { _controller: AppBundle:Page:about }
+
+AppBundle_contact:
+    path: /contact
+    methods: [GET]
+    defaults: { _controller: AppBundle:Page:contact }
+
+AppBundle_admin:
+    path: /admin
+    methods: [GET]
+    defaults: { _controller: AppBundle:Page:admin }
+
+### Matrice de compétences ###
+AppBundle_skillMatrix:
+    path: /skillMatrix
+    methods: [POST, GET]
+    defaults: { _controller: AppBundle:SkillMatrix:skillMatrix }
+
+### Pages d'authentifiation ###
+AppBundle_login:
+    path: /login
+    methods: [GET]
+    defaults : { _controller: FOSUserBundle:Security:login}
+
+AppBundle_logout:
+    path: /logout
+    methods: [GET]
+    defaults : { _controller: FOSUserBundle:Security:logout}
+
+#AppBundle_register:
+#    path: /register
+#    defaults : { _controller: FOSUserBundle:Security:register }
+
+#AppBundle_changePassword:
+#    path: /profile/change-password
+#    defaults : { _controller: FOSUserBundle:Security:change-password}
+
+
+# Pages des opérateurs
+AppBundle_operator_add:
+    path: /operator/add
+    methods: [POST,GET]
+    defaults: { _controller: AppBundle:Operator:add}
+
+AppBundle_operator_edit:
+    path: /operator/edit/{idOp}
+    methods: [POST,GET]
+    defaults: { _controller: AppBundle:Operator:edit}
+    requirements:
+        methods: GET
+        id: \d+
+
+AppBundle_operator_setAdmin:
+    path: /operator/setAdmin/{idOp}
+    methods: [GET,POST]
+    defaults: { _controller: AppBundle:Operator:setAdmin}
+    requirements:
+        methods: POST
+        id: \d+
+
+AppBundle_operator_unsetAdmin:
+    path: /operator/unsetAdmin/{idOp}
+    methods: [GET,POST]
+    defaults: { _controller: AppBundle:Operator:unsetAdmin}
+    requirements:
+        methods: POST
+        id: \d+
+
+AppBundle_operator_delete:
+    path: /operator/delete/{idOp}
+    methods: [DELETE,GET]
+    defaults: { _controller: AppBundle:Operator:delete}
+    requirements:
+        methods: GET
+        id: \d+
+
+AppBundle_operator_show:
+    path: /operator/show/{idOp}
+    methods: [GET]
+    defaults: { _controller: AppBundle:Operator:show}
+    requirements:
+        methods: GET
+        id: \d+
+
+AppBundle_operator_show_all:
+    path: /operators
+    methods: [GET]
+    defaults: { _controller: AppBundle:Operator:showAll}
+
+### page de formation ###
+AppBundle_formation_add:
+    path: /formation/add
+    methods: [POST,GET]
+    defaults: { _controller: AppBundle:Formation:add}
+
+AppBundle_formation_edit:
+    path:  /formation/edit/{idForm}
+    methods: [POST,GET]
+    defaults: { _controller: AppBundle:Formation:edit }
+    requirements:
+        methods: GET
+        id: \d+
+
+AppBundle_formation_delete:
+    path:  /formation/delete/{idForm}
+    methods: [DELETE,GET]
+    defaults: { _controller: AppBundle:Formation:delete }
+    requirements:
+        methods: GET
+        id: \d+
+
+AppBundle_formation_show:
+    path:  /formation/show/{idForm}
+    methods: [GET]
+    defaults: { _controller: AppBundle:Formation:show }
+    requirements:
+        methods: GET
+        id: \d+
+
+AppBundle_formation_show_all:
+    path:  /formations
+    methods: [GET]
+    defaults: { _controller: AppBundle:Formation:showAll }
+
+AppBundle_formation_getNbFormed:
+    path:  /formation/getNbFormed
+    methods: [GET]
+    defaults: { _controller: AppBundle:Formation:getNbFormed }
+
+### page de categorie ###
+AppBundle_category_add:
+    path: /category/add/{idForm}
+    methods: [POST,GET]
+    defaults: { _controller: AppBundle:Category:add}
+    requirements:
+        methods: GET
+        id: \d+
+
+AppBundle_category_edit:
+    path: /category/edit/{idCat}
+    methods: [POST,GET]
+    defaults: { _controller: AppBundle:Category:edit}
+    requirements:
+        methods: GET
+        id: \d+
+
+AppBundle_category_delete:
+    path: /category/delete/{idCat}
+    methods: [DELETE,GET]
+    defaults: { _controller: AppBundle:Category:delete}
+    requirements:
+        methods: GET
+        id: \d+
+
+AppBundle_category_up:
+    path: /category/up/{idCat}
+    methods: [POST,GET]
+    defaults: { _controller: AppBundle:Category:up}
+    requirements:
+        methods: GET
+        id: \d+
+
+AppBundle_category_down:
+    path: /category/down/{idCat}
+    methods: [POST,GET]
+    defaults: { _controller: AppBundle:Category:down}
+    requirements:
+        methods: GET
+        id: \d+
+
+### page de taches
+AppBundle_task_add:
+    path: /task/add/{idCat}
+    methods: [POST,GET]
+    defaults: { _controller: AppBundle:Task:add}
+    requirements:
+        methods: GET
+        id: \d+
+
+AppBundle_task_edit:
+    path: /task/edit/{idTask}
+    methods: [POST,GET]
+    defaults: { _controller: AppBundle:Task:edit}
+    requirements:
+        methods: GET
+        id: \d+
+
+AppBundle_task_delete:
+    path: /task/delete/{idTask}
+    methods: [DELETE,GET]
+    defaults: { _controller: AppBundle:Task:delete}
+    requirements:
+        methods: GET
+        id: \d+
+
+AppBundle_task_up:
+    path: /task/up/{idTask}
+    methods: [POST,GET]
+    defaults: { _controller: AppBundle:Task:up}
+    requirements:
+        methods: GET
+        id: \d+
+
+AppBundle_task_down:
+    path: /task/down/{idTask}
+    methods: [POST,GET]
+    defaults: { _controller: AppBundle:Task:down}
+    requirements:
+        methods: GET
+        id: \d+
+
+
+### Pages de formation d'opérateurs ###
+AppBundle_operatorformation_add:
+    path: /operatorformation/add/
+    methods: [POST,GET]
+    defaults: { _controller: AppBundle:OperatorFormation:add}
+
+AppBundle_operatorformation_edit:
+    path: /operatorformation/edit/{idOpForm}
+    methods: [POST,GET]
+    defaults: { _controller: AppBundle:OperatorFormation:edit}
+    requirements:
+        methods: GET
+        id: \d+
+
+AppBundle_operatorformation_delete:
+    path: /operatorformation/delete/{idOpForm}
+    methods: [DELETE,GET]
+    defaults: { _controller: AppBundle:OperatorFormation:delete}
+    requirements:
+        methods: GET
+        id: \d+
+
+AppBundle_operatorformation_show:
+    path:  /operatorformation/show/{idOpForm}
+    methods: [GET]
+    defaults: { _controller: AppBundle:OperatorFormation:show }
+    requirements:
+        methods: GET
+        id: \d+
+
+AppBundle_operatorformation_show_all:
+    path:  /operatorsformations/
+    methods: [GET]
+    defaults: { _controller: AppBundle:OperatorFormation:showAll }
+
+#pages de operatorcategory
+#routing plus forcement necessaire, cela dépend
+#AppBundle_operatorcategory_add:
+#    path: /operatorcategory/add/{idOpForm}/{idCategory}
+#    defaults: { _controller: AppBundle:OperatorCategory:add}
+#    requirements:
+#        methods: GET
+#        id: \d+
+
+AppBundle_operatorcategory_edit:
+    path: /operatorcategory/edit/{idOpForm}/{idCategory}
+    methods: [POST,GET]
+    defaults: { _controller: AppBundle:OperatorCategory:edit}
+    requirements:
+        methods: GET
+        id: \d+
+
+AppBundle_operatorcategory_delete:
+    path: /operatorcategory/delete/{idOpForm}/{idCategory}
+    methods: [DELETE,GET]
+    defaults: { _controller: AppBundle:OperatorCategory:delete}
+    requirements:
+        methods: GET
+        id: \d+
+
+#page de operatortasks
+AppBundle_operatortask_add:
+    path: /operatortask/add/{idOpForm}/{idCategory}/{idTask}
+    methods: [POST,GET]
+    defaults: { _controller: AppBundle:OperatorTask:add}
+    requirements:
+        methods: GET
+        id: \d+
+
+AppBundle_operatortask_delete:
+    path: /operatortask/delete/{idOpForm}/{idCategory}/{idTask}
+    methods: [DELETE,GET]
+    defaults: { _controller: AppBundle:OperatorTask:delete}
+    requirements:
+        methods: GET
+        id: \d+

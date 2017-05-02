@@ -1,0 +1,10 @@
+services:
+#    app_cofidur.example:
+#        class: AppBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
+
+  app_cofidur.password_resetting:
+      class: AppBundle\EventListener\PasswordResettingListener
+      arguments: ['@router']
+      tags:
+          - { name: kernel.event_subscriber }

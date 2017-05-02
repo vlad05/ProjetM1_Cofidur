@@ -1,0 +1,153 @@
+{% extends 'AppBundle::Page/Operator/operator.html.twig' %}
+
+{% block sidebar_nav %}
+	<h2><em><a href="javascript:history.go(-1)">Retour</a></em></h2>
+	{{ parent() }}
+{% endblock %}
+
+{% block body %}
+	<script src="{{ asset('bundles/appcofidur/js/sorttable.js') }}"></script>
+	<script type="text/javascript">
+		function display_subordinates(){
+			var subordinates_list= document.getElementById("subordinates_list");
+
+			/*** Rédéfinit le style de la partie des détails ***/
+			/* Si le style a déjà été définit comme "à afficher", on le cache */
+			if(subordinates_list.style.display == "block"){
+				subordinates_list.style.display= "none";
+				/* Si le style n'a pas été redéfinit ou qu'il est définit comme caché, on l'affiche */
+			} else {
+				subordinates_list.style.display= "block";
+			}
+		}
+	</script>
+
+	<h1> Résumé des compétences de {{ operator.firstname }} {{ operator.lastname }}</h1>
+
+<table>
+	<tr>
+        <th> Prénom </th>
+        <th> Nom </th>
+		<th> Date de naissance </th>
+		<th> SUPERIEUR N+1 </th>
+		<th> SUPERIEUR N+2 </th>
+		<th> Adresse Email</th>
+		<th> Matricule </th>
+        <th> Role </th>
+	</tr>
+	<tr>
+		{#<td> {{ operator.id }} </td>#}
+        <td> {{ operator.firstName }} </td>
+        <td> {{ operator.lastName }} </td>
+        <td> {{ operator.dateOfBirth |date("d/m/Y")  }} </td>
+		<td> {{ operator.superiorLvl1 }}</td>
+		<td> {{ operator.superiorLvl2 }}</td>
+		<td><a href="#">{{ operator.email }}</a></td>
+		<td> {{ operator.registrationNumber }}</td>
+        <td>
+        {% if operator.hasRole("ROLE_ADMIN") %}
+            Administrateur
+            {% if is_granted('ROLE_SUPER_ADMIN') %}
+            </td><td><button id="display_subordinates" onclick={window.location.href="{{ path('AppBundle_operator_unsetAdmin', {'idOp': operator.id}) }}"}>Rétrograder</button>
+            {% endif %}
+        {% else %}
+            Utilisateur
+            {% if is_granted('ROLE_SUPER_ADMIN') %}
+            {#</td><td><a href="{{ path('AppBundle_operator_setAdmin', {'idOp': operator.id}) }}">Promouvoir</a>#}
+            </td><td><button id="display_subordinates" onclick={window.location.href="{{ path('AppBundle_operator_setAdmin', {'idOp': operator.id}) }}"}>Promouvoir</button>
+            {% endif %}
+        {% endif %}
+        </td>
+	</tr>
+</table>
+<br/>
+<br/>
+
+<button id="display_subordinates" onclick="display_subordinates()">Afficher/Cacher les subalternes</button>
+<div id="subordinates_list" style="display: none">
+	{% if subordinates %}
+	<h3>Liste des subalternes de {{ operator.firstname }} {{ operator.lastname }} :</h3>
+	<table class="sortable">
+		<tr>
+			<th>NOM</th>
+			<th>PRENOM</th>
+		</tr>
+		{% for subordinate in subordinates %}
+		<tr>
+			<td colspan="2"> <a href="{{ path('AppBundle_operator_show', {'idOp': subordinate.id}) }}">{{ subordinate.lastname | upper }} {{ subordinate.firstname }} </a></td>
+		</tr>
+		{% endfor %}
+	</table>
+	{% else %}
+		<h3>Vous n'êtes le chef d'aucun opérateur, désolé !</h3>
+	{% endif %}
+</div>
+
+	{% if operatorsformations %}
+	<h3>Légende des couleurs des cadres :</h3>
+	<table class="color_legend">
+		<tr>
+			<th class="text_legende">Code couleur</th>
+			<td class="formedNotValidated"></td>
+			<td class="learningFormation"></td>
+			<td class="futureFormation"></td>
+			<td class="formedValidated"></td>
+			<td class="formedToTeach"></td>
+			<td class="formedUnvalidated"></td>
+		</tr>
+		<tr>
+			<th class="text_legende">Statut</th>
+			<td class="text_legende">Formé non habilité</td>
+			<td class="text_legende">En Formation</td>
+			<td class="text_legende">Prévision Formation</td>
+			<td class="text_legende">Habilité</td>
+			<td class="text_legende">Habilité à former</td>
+			<td class="text_legende">Invalidée</td>
+		</tr>
+	</table>
+
+<h2>Cet opérateur suit les formations suivantes :</h2>
+<table class="ope_formations_array">
+	{% set sautdeligne= 0 %}
+	{% for operatorformation in operatorsformations %}
+		{% if sautdeligne is even %}
+			<tr>
+		{% endif %}
+
+		{% include 'AppBundle::Page/OperatorFormation/operatorformation_showSumup.html.twig' %}
+
+		{% if sautdeligne is odd %}
+			</tr>
+		{% endif %}
+		{% set sautdeligne= sautdeligne+1 %}
+	{% endfor %}
+</table>
+{% else %}
+	<h3>Cet opérateur n'a encore suivi aucune formation</h3>
+{% endif %}
+
+{# Formations supervisées par l'opérateur #}
+{% if supervisedFormations %}
+	<h2>Cet opérateur supervise les formations suivantes :</h2>
+	<table class="ope_formations_array">
+
+    {% set sautdeligne= 0 %}
+    {% for operatorformation in supervisedFormations %}
+        {% if sautdeligne is even %}
+            <tr>
+        {% endif %}
+
+        {% include 'AppBundle::Page/OperatorFormation/operatorformation_showSumup.html.twig' %}
+
+        {% if sautdeligne is odd %}
+            </tr>
+        {% endif %}
+        {% set sautdeligne= sautdeligne+1 %}
+    {% endfor %} {# Fin for supervisedFormation #}
+
+	</table>
+{% else %}
+	<h3>Cet opérateur n'a encore supervisé aucune formation</h3>
+{% endif %}
+
+{% endblock %}

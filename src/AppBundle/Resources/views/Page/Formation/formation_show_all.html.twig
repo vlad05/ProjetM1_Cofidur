@@ -1,0 +1,38 @@
+{% extends 'AppBundle::Page/Formation/formation.html.twig' %}
+
+{% block sidebar_container %}{% endblock %}
+
+{% block body %}
+	<h1>Affichage de toutes les formations</h1>
+
+	<script src="{{ asset('bundles/appcofidur/js/sorttable.js') }}"></script>
+
+	<script type="text/javascript">
+		function wanted_formation(wanted_formation_button_id, formation_id){
+			alert("Vous souhaitez passer la formation ".concat(formation_id).concat(" !"));
+		}
+	</script>
+
+	<input type="button" value="Ajouter une formation" onclick="{window.location.href='{{ path('AppBundle_formation_add') }}'}">
+	<br/>
+	<br/>
+
+	<table class="sortable">
+		<tr>
+			<th> NOM </th>
+			<th> TYPE </th>
+			<th> SECTEUR </th>
+			<th> MOYENS PEDAGOGIQUES </th>
+			<th> MOYENS MATERIELS </th>
+			<th> TEMPS DE VALIDITÉ </th>
+			<th> CRITICITE </th>
+			<th> HABILITES </th>
+		</tr>
+	{% set nb_formation= 1 %}
+	{% for formation in formations %}
+		{% include 'AppBundle::Page/Formation/formation_show_line.html.twig' %}
+	{% set nb_formation= nb_formation+1 %}
+	{% endfor %}
+	</table>
+
+{% endblock body %}

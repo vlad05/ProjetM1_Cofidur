@@ -1,0 +1,143 @@
+various:
+    search: 'Recherche'
+
+# Catégorie
+category:
+    id: 'Identifiant de la catégorie'
+    name: 'Nom de la catégorie'
+    order: 'Ordonnancement de la catégorie'
+    save:
+        submit: 'Enregistrer la catégorie'
+        submitAndAdd: 'Enregistrer et ajouter une autre'
+    edit:
+        submit: 'Mettre à jour la catégorie'
+    add:
+        submit: 'Créer la catégorie'
+    delete:
+        submit: 'Supprimer la catégorie'
+
+# Tâche
+task:
+    id: 'Identifiant de la tâche'
+    order: 'Ordonnancement de la tâche'
+    name: 'Intitulé de la tâche'
+    save:
+        submit: 'Enregistrer la tâche'
+        submitAndAdd: 'Enregistrer et ajouter une autre'
+    edit:
+        submit: 'Mettre à jour la tâche'
+    add:
+        submit: 'Créer la tâche'
+    delete:
+        submit: 'Supprimer la tâche'
+
+# Opérateur
+operator:
+    id: 'Identifiant de l''opérateur'
+    firstName: 'Prénom'
+    lastName: 'Nom'
+    registrationNumber: 'Matricule'
+    dateOfBirth: 'Date de naissance'
+    email: 'Adresse e-mail'
+    employmentStatus: 'Statut d''embauche'
+    statusChoices:
+        cdi: 'CDI'
+        interim: 'Intérimaire'
+        cdd: 'CDD'
+    save:
+        submit: 'Enregistrer l''opérateur'
+    edit:
+        submit: 'Mettre à jour l''opérateur'
+    add:
+        submit: 'Créer l''opérateur'
+        submitAndAdd: 'Créer et ajouter un autre'
+    delete:
+        submit: 'Supprimer l''opérateur'
+    superior1: 'Supérieur Niveau 1'
+    superior2: 'Supérieur Niveau 2'
+
+# Formation
+formation:
+    title: 'Formation'
+    id: 'Identifiant de la formation'
+    name: 'Nom de la formation'
+    type: 'Type de la formation'
+    goal: 'Objectif visé'
+    teachingAids: 'Moyens pédagogiques'
+    placesMaterialRessources: 'Lieu et moyens matériels'
+    reference: 'Référence'
+    sector: 'Secteur'
+    validityTime: 'Temps de validité'
+    criticality: 'Criticité'
+    save:
+        submit: 'Enregistrer la formation'
+    edit:
+        submit: 'Mettre à jour la formation'
+    add:
+        submit: 'Créer la formation'
+    delete:
+        submit: 'Supprimer la formation'
+
+# OperatorCategory
+operatorCategory:
+    id: 'Identifiant de la catégorie de l''opérateur'
+    dateSignature: 'Date de la signature'
+    signature: 'Signature'
+    nbHours: 'Nombre d''heures'
+    trainerName: 'Nom du Formateur'
+    save:
+        submit: 'Enregistrer'
+    edit:
+        submit: 'Mettre à jour la catégorie de l''opérateur'
+    add:
+        submit: 'Créer la catégorie de l''opérateur'
+    delete:
+        submit: 'Supprimer la catégorie de l''opérateur'
+
+# Formation d'opérateur
+operatorFormation:
+    operatorId: 'Identifiant de l''opérateur'
+    formationId: 'Identifiant de la formation'
+    formationName: 'Nom de la formation'
+    dateBegin: 'Date de début de formation'
+    dateEnd: 'Date de fin de formation'
+    validationStatus: 'Etat de la formation'
+    validationChoices:
+        unvalidated: 'Non validé'
+        validating: 'En cours de validation'
+        planned: 'Prévue'
+        formed: 'Formé'
+        can_form: 'Peut former'
+    commentary: 'Commentaire°'
+    formerId: 'Identifiant du formateur'
+    operatorName: 'Nom de l''opérateur'
+    superior1Name: 'Nom du supérieur N+1'
+    superior2Name: 'Nom du supérieur N+2'
+    formerName: 'Nom du tuteur'
+    save:
+        submit: 'Enregistrer la formation de l''opérateur'
+    edit:
+        submit: 'Mettre à jour la formation d''opérateur'
+    add:
+        submit: 'Ajouter la formation à l''opérateur'
+    delete:
+        submit: 'Supprimer la formation de l''opérateur'
+    qualification: 'Qualification'
+    qualificationChoices:
+        formed: 'Habilité'
+        formedUnentitled: 'Formé non habilité'
+        forming: 'En Formation'
+        foreseenFormation: 'Prévision Formation'
+        canForm: 'Habilité à former'
+
+# Enregistrement
+security:
+    login:
+        firstName: 'Prénom'
+        lastName: 'Nom'
+        dateOfBirth: 'Date de naissance'
+
+date:
+    year: 'Année'
+    month: 'Mois'
+    day: 'Jour'

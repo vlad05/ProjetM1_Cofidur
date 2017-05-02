@@ -1,0 +1,75 @@
+<td class="ope_formations_array_elem">
+    <fieldset
+        {#Couleur du fieldset selon l'état de validation de celle-ci#}
+        {% if 1 == operatorformation.validation %}
+            class="formedNotValidated_formation_sumup"
+        {% elseif 2 == operatorformation.validation %}
+            class="learningFormation_formation_sumup"
+        {% elseif 3 == operatorformation.validation %}
+            class="futureFormation_formation_sumup"
+        {% elseif operatorformation.isInvalidated() %}
+            class="unvalidated_formation_sumup"
+        {% elseif 4 == operatorformation.validation %}
+            class="formedValidated_formation_sumup"
+        {% elseif 5 == operatorformation.validation %}
+            class="formedToTeach_formation_sumup"
+        {% endif %}
+    >
+        <legend class="ope_formations_array_elem_legend">
+            <a href="{{ path('AppBundle_operatorformation_show', {'idOpForm': operatorformation.id}) }}">Détails de la formation</a>
+        </legend>
+        <table class="category_page">
+            <tr>
+                <th class="entete_category">Nom</th>
+                <td>{{ operatorformation.formation.name }} </td>
+            </tr>
+            {# Champs possibles selon le demandes de l'entreprises #}
+            {#<tr>#}
+                {#<th class="entete_category">Type</th>#}
+                {#<td title="{{ operatorformation.formation.type }}">{{ operatorformation.formation.type| slice(0,30) }}... </td>#}
+            {#</tr>#}
+            {#<tr>#}
+                {#<th class="entete_category">Objectif</th>#}
+                {#<td title="{{ operatorformation.formation.goal }}">{{ operatorformation.formation.goal| slice(0,30) }}... </td>#}
+            {#</tr>#}
+            {#<tr>#}
+            {#<th class="entete_category">Moyens pédagogiques</th>#}
+            {#<td title="{{ operatorformation.formation.teachingAids }}">{{ operatorformation.formation.teachingAids| slice(0,30) }}... </td>#}
+            {#</tr>#}
+            {#<tr>#}
+            {#<th class="entete_category">Lieu & moyens matériels</th>#}
+            {#<td title="{{ operatorformation.formation.placesMaterialRessources }}">{{ operatorformation.formation.placesMaterialRessources| slice(0,30) }}... </td>#}
+            {#</tr>#}
+            <tr>
+                <th class="entete_category">Criticité</th>
+                <td>{{ operatorformation.formation.criticality }} </td>
+            </tr>
+            <tr>
+                <th class="entete_category">Opérateur formé</th>
+                <td>{{ operatorformation.operator.lastName | upper }} {{ operatorformation.operator.firstName | upper | slice(0,1)  }}. </td>
+            </tr>
+            <tr>
+                <th class="entete_category">Formateur</th>
+                <td> {{ operatorformation.former.lastName | upper }} {{ operatorformation.former.firstName | upper | slice(0,1) }}. </td>
+            </tr>
+            <tr>
+                <th class="entete_category">Temps écoulé depuis la fin de la formation</th>
+            {% if operatorformation.isFinished() %}
+                <td>{{ operatorformation.getElapsedTime() }} jour(s)</td>
+            {% else %}
+                <td><i>Formation non terminée</i></td>
+            {% endif %}
+            </tr>
+            {% if operatorformation.isRenewable() and not operatorformation.isInvalidated() %}
+            <tr>
+                <th class="entete_category">Temps de validité restant</th>
+                <td>{{ operatorformation.getRemainingTime() }} jour(s)</td>
+            </tr>
+            {% endif %}
+            {#Valeur a changer : champ de validité a placer ici a la plac du 5#}
+            {% if operatorformation.isInvalidated %}
+                <tr><td colspan="2">LA FORMATION N'EST PLUS VALIDE</td></tr>
+            {% endif %}
+        </table>
+    </fieldset>
+</td>

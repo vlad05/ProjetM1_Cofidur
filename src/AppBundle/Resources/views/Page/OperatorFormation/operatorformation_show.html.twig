@@ -1,0 +1,127 @@
+{% extends 'AppBundle::Page/OperatorFormation/operatorformation.html.twig' %}
+
+{% block sidebar_nav %}
+    <h2><em><a href="javascript:history.go(-1)">Retour</a></em></h2>
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+	<h1>Formation d'un opérateur (FFO)</h1>
+
+	<!--
+		INFORMATIONS SUR LE TUTEUR, L'OPERATEUR ET LES DATES
+	-->
+	<fieldset class="sumup operatorformation">
+		<legend>Informations</legend>
+		<table class="infos operator">
+			<tr>
+				<th>Nom</th>
+				<td> {{ operatorformation.operator.firstname }}</td>
+			</tr>
+			<tr>
+				<th>Prénom</th>
+				<td> {{ operatorformation.operator.lastname }}</td>
+			</tr>
+			<tr>
+				<th>Service</th>
+				<td > SERVICE--{{ operatorformation.operator }}??</td>
+			</tr>
+		</table>
+
+		<table class="infos tutor">
+            <tr>
+				<th>Tuteur</th>
+            </tr>
+            <tr>
+				<td>{{ operatorformation.former.firstName }} {{ operatorformation.former.lastName }}</td>
+            </tr>
+		</table>
+
+		<table class="dates operatorformation">
+			<tr>
+				<th>Date de début</th>
+				<td>{{ operatorformation.dateBegin|date("m/d/Y")}}</td>
+			</tr>
+			<tr>
+				<th>Date de fin</th>
+				<td>{{ operatorformation.dateEnd|date("m/d/Y") }}</td>
+			</tr>
+			<tr>
+                <th>Validation</th>
+                {% if operatorformation.validation == 1 %}
+                <td>La formation est terminée mais non validée</td> </tr>
+                {% elseif operatorformation.validation == 2 %}
+                <td>La formation est en cours</td> </tr>
+                {% elseif operatorformation.validation == 3 %}
+                <td>La formation est prévue mais n'a pas encore commencé</td> </tr>
+                {% else %}
+                    {% if operatorformation.formation.validityTime > 0 %}
+                        {% if operatorformation.getRemainingTime() > 0 %}
+            <tr><th>Valide ?</th>
+                    <td>La formation est valide</td> </tr>
+            <tr><th>Temps avant invalidité</th>
+                    <td>{{ operatorformation.getRemainingTime() }} jour(s)</td></tr>
+            <tr><th>Temps écoulé</th>
+                    <td>{{ operatorformation.getElapsedTime() }} jour(s)</td></tr>
+                        {% else  %}
+            <tr><th>Valide ? </th>
+                    <td class="error">La formation n'est pas ou plus valide</td></tr>
+            <tr><th>Temps avant invalidité</th>
+                    <td>{{ operatorformation.getRemainingTime() }} jour(s)</td></tr>
+            <tr><th>Temps écoulé</th>
+                    <td>{{ operatorformation.getElapsedTime() }} jour(s)</td></tr>
+                        {% endif %}
+                    {% else %}
+                <th colspan="2">Pas d'invalidation sur cette formation</th>
+                    {% endif %}
+                {% endif %}
+            </tr>
+
+		</table>
+	</fieldset>
+
+	<!--
+		RESUME DE LA FORMATION
+	-->
+	<fieldset class="sumup formation">
+		<legend>Résumé de la formation</legend>
+		<table class="infos formation">
+			<tr>
+				<th>Nom de la formation</th>
+				<td class="formation name">
+                    <a href="{{ path('AppBundle_formation_show', {'idForm': operatorformation.formation.id }) }}">{{ operatorformation.formation.name }}</a>
+                </td>
+			</tr>
+			<tr>
+				<th>Objectif visé</th>
+				<td > {{ operatorformation.formation.goal}}</td>
+			</tr>
+			<tr>
+				<th>Moyens pédagogiques</th>
+				<td > {{ operatorformation.formation.placesMaterialRessources }}</td>
+			</tr>
+		</table>
+	</fieldset>
+
+	<!--
+		SUIVI DE L'AVANCEMENT DE LA FORMATION
+	-->
+	<fieldset class="details operatorformation">
+		<legend>Etapes de la formation :</legend>
+	{% set indice_category= 1 %}
+		<!--
+			 Affichage de chaque catégorie
+			 On liste toutes les catégories de la formation et on rempli l'avancement de chaque catégorie. Si la
+			 catégorie n'existe pas dans l'operatorformation, c'est qu'elle a été rajoutée après que l'operatorformation
+			 a été créée. (opeCat à null dans ce cas)
+		-->
+	{% for category in operatorformation.formation.categories %}
+        {% include 'AppBundle::Page/OperatorCategory/operatorcategory_show.html.twig' %}
+
+        {% set indice_category= indice_category+1 %}
+    {% endfor %}
+
+	</fieldset>
+	<br/>
+
+{% endblock %}
