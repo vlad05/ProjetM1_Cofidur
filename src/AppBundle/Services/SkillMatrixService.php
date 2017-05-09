@@ -1,22 +1,20 @@
-<?php
-namespace AppBundle\Controller;
+<?php 
+namespace AppBundle\Services;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
-use AppBundle\Form\Type\SkillMatrixType;
+use Doctrine\ORM\EntityManager;
 
-
-class SkillMatrixController extends Controller
+class SkillMatrixService
 {
-
-    public function skillMatrixAction(Request $request)
-    {
-        /* $matrice = $this->container->get('app_cofidur.skillmatrix');
-        
-        return $matrice->skillMatrix();
-        */
-		$em = $this->getDoctrine()->getManager();
-
+	private $em;
+	
+	public function __construct(EntityManager $entityManager) {
+		$this->em = $entityManager;
+	}
+	
+	
+	public function skillMatrix() {
+		//$em = $this->em->getDoctrine()->getManager();
+		/*
         $form = $this->createForm(SkillMatrixType::class);
 
         $form->handleRequest($request);
@@ -115,7 +113,7 @@ class SkillMatrixController extends Controller
 
                 $allConnexions[$i]= [$operatorId, $formationId, $validation, $operatorsformationsId];
             }
-        }else{
+        }else{*/
             //traitement général
             $formations = $em->getRepository('AppBundle:Formation')->findAll();
             $operators= $em->getRepository('AppBundle:User')->findAll();
@@ -131,14 +129,17 @@ class SkillMatrixController extends Controller
 
                 $allConnexions[$i]= [$operatorId, $formationId, $validation, $operatorsformationsId];
             }
-        }
+        //}
 
         return $this->render('AppBundle:Page:skillMatrix.html.twig', array(
             'form'                         => $form->createView(),
             'formations'                   => $formations,
             'operators'                    => $operators,
             'formationsValidation'         => $allConnexions,
-        )); 
-    }
-
+        ));
+	}
+	
 }
+
+
+

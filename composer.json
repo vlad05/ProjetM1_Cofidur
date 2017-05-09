@@ -21,6 +21,7 @@
         ]
     },
     "require": {
+	"phpoffice/phpexcel": "*",
         "php": ">=5.5.9",
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/doctrine-cache-bundle": "^1.2",
