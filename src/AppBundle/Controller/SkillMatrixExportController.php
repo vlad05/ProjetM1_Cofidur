@@ -314,7 +314,7 @@ class SkillMatrixExportController extends Controller
 		// adding headers
 		$dispositionHeader = $response->headers->makeDisposition(
 			ResponseHeaderBag::DISPOSITION_ATTACHMENT,
-			'PhpExcelFileSample.xlsx'
+			'MatriceFFO.xlsx'
 		);
 		$response->headers->set('Content-Type', 'text/vnd.ms-excel; charset=utf-8');
 		$response->headers->set('Pragma', 'public');
