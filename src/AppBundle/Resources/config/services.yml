@@ -9,6 +9,6 @@ services:
       tags:
           - { name: kernel.event_subscriber }
        
-  app_cofidur.skillmatrix:
-      class: AppBundle\Services\SkillMatrixService
-      arguments: ['@doctrine.orm.entity_manager']
+ # app_cofidur.skillmatrix:
+ #     class: AppBundle\Services\SkillMatrixService
+ #     arguments: ['@doctrine.orm.entity_manager']

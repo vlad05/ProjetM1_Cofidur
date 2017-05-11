@@ -53,6 +53,11 @@ AppBundle_logout:
 
 
 # Pages des opérateurs
+AppBundle_operator_import:
+    path: /operator/add/all
+    methods: [POST,GET]
+    defaults: { _controller: AppBundle:Operator:import}
+
 AppBundle_operator_add:
     path: /operator/add
     methods: [POST,GET]

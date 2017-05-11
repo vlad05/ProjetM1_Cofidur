@@ -91,6 +91,19 @@ class User extends BaseUser
      */
     private $registrationNumber;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="site", type="string", nullable=true)
+     */
+    private $site;
+    
+     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_entree", type="date", nullable=true)
+     */
+    private $dateEntree;
 
     /**
      * Get id
@@ -268,5 +281,53 @@ class User extends BaseUser
         $this->registrationNumber = $registrationNumber;
 
         return $this;
+    }
+    
+     /**
+     * Get site
+     *
+     * @return string
+     */
+    public function getSite()
+    {
+        return $this->site;
+    }
+    
+    /**
+     * Set registrationNumber
+     *
+     * @param string $registrationNumber
+     *
+     * @return User
+     */
+    public function setSite($site)
+    {
+        $this->site = $site;
+
+        return $this;
+    }
+    
+     /**
+     * Set dateEntree
+     *
+     * @param \DateTime $dateEntree
+     *
+     * @return User
+     */
+    public function setDateEntree($dateEntree)
+    {
+        $this->dateEntree = $dateEntree;
+
+        return $this;
+    }
+
+    /**
+     * Get dateEntree
+     *
+     * @return \DateTime
+     */
+    public function getDateEntree ()
+    {
+        return $this->dateEntree;
     }
 }
