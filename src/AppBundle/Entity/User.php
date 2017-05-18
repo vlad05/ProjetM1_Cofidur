@@ -74,13 +74,13 @@ class User extends BaseUser
 
     /**
      * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumn(name="superior1_id", referencedColumnName="id", nullable=true)
+     * @ORM\JoinColumn(onDelete="SET NULL", name="superior1_id", referencedColumnName="id", nullable=true)
      */
     private $superiorLvl1;
 
     /**
      * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumn(name="superior2_id", referencedColumnName="id", nullable=true)
+     * @ORM\JoinColumn(onDelete="SET NULL", name="superior2_id", referencedColumnName="id", nullable=true)
      */
     private $superiorLvl2;
 
@@ -98,7 +98,7 @@ class User extends BaseUser
      */
     private $site;
     
-     /**
+     /**	
      * @var \DateTime
      *
      * @ORM\Column(name="date_entree", type="date", nullable=true)
@@ -283,7 +283,7 @@ class User extends BaseUser
         return $this;
     }
     
-     /**
+     /**	
      * Get site
      *
      * @return string
@@ -293,8 +293,8 @@ class User extends BaseUser
         return $this->site;
     }
     
-    /**
-     * Set registrationNumber
+    /**	
+     * Set site
      *
      * @param string $registrationNumber
      *
@@ -307,7 +307,7 @@ class User extends BaseUser
         return $this;
     }
     
-     /**
+     /**	
      * Set dateEntree
      *
      * @param \DateTime $dateEntree
@@ -320,8 +320,8 @@ class User extends BaseUser
 
         return $this;
     }
-
-    /**
+	
+    /**		
      * Get dateEntree
      *
      * @return \DateTime

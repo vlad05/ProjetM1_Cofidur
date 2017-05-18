@@ -18,6 +18,7 @@ class AppKernel extends Kernel
             new AppBundle\AppBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new Liuggio\ExcelBundle\LiuggioExcelBundle(),// Add excel bundle
+            new Ensepar\Html2pdfBundle\EnseparHtml2pdfBundle(),	//Add pdf bundle
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

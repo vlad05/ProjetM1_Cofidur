@@ -2,9 +2,16 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\User;
+use AppBundle\Entity\ImportSalaries;
 use AppBundle\Form\Type\OperatorType;
+use AppBundle\Form\Type\ImportSalariesType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+
 use PHPExcel\IOFactory;
 use DateTime;
 
@@ -140,13 +147,49 @@ class OperatorController extends Controller
         ));
     }
     
-    //Sert à l'import de tous les salariés à partir d'un fichier csv (qui vient d'horoquartz)
+    
+    //Sert à l'import de tous les salariés à partir d'un fichier PRN (qui vient d'horoquartz)
     public function importAction(Request $request)
     {
-		$row = 1;
-		$em = $this->getDoctrine()->getManager();
+		$fichier = new ImportSalaries();
+		//$form = $this->createForm(ImportSalariesType::class, $fichier);
+	
+        /*$form = $this->createFormBuilder($fichier)
+            ->add('importSalaries', FileType::class, array('label' =>'Fichier à importer (.prn only)'));            
+		
+		/*return $this->render('AppBundle:Page/Operator:operator_show_all.html.twig', array(
+            'form' => $form->createView(),
+        ));
+		*/
+		//$form->handleRequest($request);
+		
+		//https://symfony.com/doc/current/controller/upload_file.html#main
+		/*if ($form->isSubmitted() && $form->isValid()) {
+			return $this->redirectToRoute('AppBundle_homepage');
+            // $file stores the uploaded PDF file
+            /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
+          //  $file = $fichier->getFichier();
+
+            // Generate a unique name for the file before saving it
+           
+          // $fileName = md5(uniqid()).'.'.$file->guessExtension();
+
+            // Move the file to the directory where brochures are stored
+           /* $file->move(
+                $this->getParameter('fichierimport_directory'),
+                $fileName
+            );
+
+            // Update the 'brochure' property to store the PDF file name
+            // instead of its contents
+            $product->setImportSalaries($fileName);
+			*/
+/*************************************************************/
+			$row = 1;
+			$em = $this->getDoctrine()->getManager();
+			//echo "OMGOMGOMG ".$fileName."HAHAHAHA";
 			if (($handle = fopen("/var/www/html/cofidur_projet/salariesTXT.prn", "r")) !== FALSE) {
-				while (($data = fgetcsv($handle, 1000, ";")) !== FALSE) {
+				while (($data = fgetcsv($handle, 1000, ";")) !== FALSE) { 
 					$num = count($data);
 					$row++;
 					if($row > 10) {
@@ -216,7 +259,20 @@ class OperatorController extends Controller
 				fclose($handle);
 			}
 		
+
+/*************************************************************/
+
+            // ... persist the $product variable or any other work
+
+            //return $this->redirect($this->generateUrl('app_product_list'));
+        //}	//fin if($form->isSubmitted() && $form->isValid())
+
+     /*   return $this->render('AppBundle:Page/Operator:operator_show_all.html.twig', array(
+            'form' => $form->createView(),
+        ));
+		*/
 		return $this->redirectToRoute('AppBundle_operator_show_all');
 		
 	}
+
 }

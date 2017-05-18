@@ -33,9 +33,9 @@ class OperatorType extends AbstractType
             ->add('status', ChoiceType::class,
                 array(
                     'choices'  => array(
-                        1 => 'operator.statusChoices.interim',
-                        2 => 'operator.statusChoices.cdd',
-                        3 => 'operator.statusChoices.cdi',
+                        'operator.statusChoices.interim' => 1,
+                        'operator.statusChoices.cdd' => 2,
+                        'operator.statusChoices.cdi' => 3,
                     ),
                     'label_format' => 'operator.employmentStatus',
                 )
@@ -52,6 +52,22 @@ class OperatorType extends AbstractType
                     'label_format' => 'operatorFormation.superior2Name',
                 )
             )
+            ->add('site', ChoiceType::class, 
+				array(
+					'choices' => array(
+						'Périgueux' => 'operator.siteChoices.perigueux',
+						'Laval' => 'operator.siteChoices.laval',
+						'Cherbourg' => 'operator.siteChoices.cherbourg',
+						'Montpellier' => 'operator.siteChoices.montpellier',
+					),
+				)
+			)
+			->add('dateEntree', DateType::class, array(
+                //'label_format' => 'security.login.dateEntree',
+                'placeholder' => array(
+                    'year' => 'date.year', 'month' => 'date.month', 'day' => 'date.day'
+                ),
+            ))
             ->add('save', SubmitType::class, array('label' => 'operator.add.submit'))
             ->add('saveAndAdd', SubmitType::class, array('label' => 'operator.add.submitAndAdd'));
     }

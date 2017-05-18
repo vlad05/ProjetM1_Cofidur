@@ -28,7 +28,7 @@ class LoadOperatorFormationData extends AbstractFixture implements OrderedFixtur
                     $formation = $manager->getRepository('AppBundle:Formation')->find($i);
 
                     $operatorformation = new OperatorFormation();
-                    $validation = rand(1, 5);
+                    $validation = rand(1, 4);
                     $operatorformation->setValidation($validation);
                     $operatorformation->setDateBegin(date_create(date('Y-m-d H:i:s')));
                     if ($validation == 1 ) {

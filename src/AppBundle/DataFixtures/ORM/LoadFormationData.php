@@ -170,7 +170,7 @@ class LoadFormationData extends AbstractFixture implements OrderedFixtureInterfa
         $this->createVisserie($manager);
 
         $formation = new Formation();
-        $formation->setCriticality(rand(1,5));
+        $formation->setCriticality(rand(1,4));
         $formation->setGoal("OBJECTIF");
         $formation->setType("TYPE");
         $formation->setSector("SECTEUR");
@@ -182,7 +182,7 @@ class LoadFormationData extends AbstractFixture implements OrderedFixtureInterfa
         $manager->persist($formation);
 
         $formation = new Formation();
-        $formation->setCriticality(rand(1,5));
+        $formation->setCriticality(rand(1,4));
         $formation->setGoal("OBJECTIF");
         $formation->setType("TYPE");
         $formation->setSector("SECTEUR");
@@ -194,7 +194,7 @@ class LoadFormationData extends AbstractFixture implements OrderedFixtureInterfa
         $manager->persist($formation);
 
         $formation = new Formation();
-        $formation->setCriticality(rand(1,5));
+        $formation->setCriticality(rand(1,4));
         $formation->setGoal("OBJECTIF");
         $formation->setType("TYPE");
         $formation->setSector("SECTEUR");
@@ -206,7 +206,7 @@ class LoadFormationData extends AbstractFixture implements OrderedFixtureInterfa
         $manager->persist($formation);
 
         $formation = new Formation();
-        $formation->setCriticality(rand(1,5));
+        $formation->setCriticality(rand(1,4));
         $formation->setGoal("OBJECTIF");
         $formation->setType("TYPE");
         $formation->setSector("SECTEUR");
@@ -218,7 +218,7 @@ class LoadFormationData extends AbstractFixture implements OrderedFixtureInterfa
         $manager->persist($formation);
 
         $formation = new Formation();
-        $formation->setCriticality(rand(1,5));
+        $formation->setCriticality(rand(1,4));
         $formation->setGoal("OBJECTIF");
         $formation->setType("TYPE");
         $formation->setSector("SECTEUR");
@@ -230,7 +230,7 @@ class LoadFormationData extends AbstractFixture implements OrderedFixtureInterfa
         $manager->persist($formation);
 
         $formation = new Formation();
-        $formation->setCriticality(rand(1,5));
+        $formation->setCriticality(rand(1,4));
         $formation->setGoal("OBJECTIF");
         $formation->setType("TYPE");
         $formation->setSector("SECTEUR");
@@ -242,7 +242,7 @@ class LoadFormationData extends AbstractFixture implements OrderedFixtureInterfa
         $manager->persist($formation);
 
         $formation = new Formation();
-        $formation->setCriticality(rand(1,5));
+        $formation->setCriticality(rand(1,4));
         $formation->setGoal("OBJECTIF");
         $formation->setType("TYPE");
         $formation->setSector("SECTEUR");
@@ -254,7 +254,7 @@ class LoadFormationData extends AbstractFixture implements OrderedFixtureInterfa
         $manager->persist($formation);
 
         $formation = new Formation();
-        $formation->setCriticality(rand(1,5));
+        $formation->setCriticality(rand(1,4));
         $formation->setGoal("OBJECTIF");
         $formation->setType("TYPE");
         $formation->setSector("SECTEUR");
@@ -266,7 +266,7 @@ class LoadFormationData extends AbstractFixture implements OrderedFixtureInterfa
         $manager->persist($formation);
 
         $formation = new Formation();
-        $formation->setCriticality(rand(1,5));
+        $formation->setCriticality(rand(1,4));
         $formation->setGoal("OBJECTIF");
         $formation->setType("TYPE");
         $formation->setSector("SECTEUR");
@@ -278,7 +278,7 @@ class LoadFormationData extends AbstractFixture implements OrderedFixtureInterfa
         $manager->persist($formation);
 
         $formation = new Formation();
-        $formation->setCriticality(rand(1,5));
+        $formation->setCriticality(rand(1,4));
         $formation->setGoal("OBJECTIF");
         $formation->setType("TYPE");
         $formation->setSector("SECTEUR");
@@ -290,7 +290,7 @@ class LoadFormationData extends AbstractFixture implements OrderedFixtureInterfa
         $manager->persist($formation);
 
         $formation = new Formation();
-        $formation->setCriticality(rand(1,5));
+        $formation->setCriticality(rand(1,4));
         $formation->setGoal("OBJECTIF");
         $formation->setType("TYPE");
         $formation->setSector("SECTEUR");
@@ -302,7 +302,7 @@ class LoadFormationData extends AbstractFixture implements OrderedFixtureInterfa
         $manager->persist($formation);
 
         $formation = new Formation();
-        $formation->setCriticality(rand(1,5));
+        $formation->setCriticality(rand(1,4));
         $formation->setGoal("OBJECTIF");
         $formation->setType("TYPE");
         $formation->setSector("SECTEUR");
@@ -314,7 +314,7 @@ class LoadFormationData extends AbstractFixture implements OrderedFixtureInterfa
         $manager->persist($formation);
 
         $formation = new Formation();
-        $formation->setCriticality(rand(1,5));
+        $formation->setCriticality(rand(1,4));
         $formation->setGoal("OBJECTIF");
         $formation->setType("TYPE");
         $formation->setSector("SECTEUR");
@@ -326,7 +326,7 @@ class LoadFormationData extends AbstractFixture implements OrderedFixtureInterfa
         $manager->persist($formation);
 
         $formation = new Formation();
-        $formation->setCriticality(rand(1,5));
+        $formation->setCriticality(rand(1,4));
         $formation->setGoal("OBJECTIF");
         $formation->setType("TYPE");
         $formation->setSector("SECTEUR");
@@ -338,7 +338,7 @@ class LoadFormationData extends AbstractFixture implements OrderedFixtureInterfa
         $manager->persist($formation);
 
         $formation = new Formation();
-        $formation->setCriticality(rand(1,5));
+        $formation->setCriticality(rand(1,4));
         $formation->setGoal("OBJECTIF");
         $formation->setType("TYPE");
         $formation->setSector("SECTEUR");
@@ -350,7 +350,7 @@ class LoadFormationData extends AbstractFixture implements OrderedFixtureInterfa
         $manager->persist($formation);
 
         $formation = new Formation();
-        $formation->setCriticality(rand(1,5));
+        $formation->setCriticality(rand(1,4));
         $formation->setGoal("OBJECTIF");
         $formation->setType("TYPE");
         $formation->setSector("SECTEUR");
@@ -362,7 +362,7 @@ class LoadFormationData extends AbstractFixture implements OrderedFixtureInterfa
         $manager->persist($formation);
 
         $formation = new Formation();
-        $formation->setCriticality(rand(1,5));
+        $formation->setCriticality(rand(1,4));
         $formation->setGoal("OBJECTIF");
         $formation->setType("TYPE");
         $formation->setSector("SECTEUR");
@@ -374,7 +374,7 @@ class LoadFormationData extends AbstractFixture implements OrderedFixtureInterfa
         $manager->persist($formation);
 
         $formation = new Formation();
-        $formation->setCriticality(rand(1,5));
+        $formation->setCriticality(rand(1,4));
         $formation->setGoal("OBJECTIF");
         $formation->setType("TYPE");
         $formation->setSector("SECTEUR");
@@ -386,7 +386,7 @@ class LoadFormationData extends AbstractFixture implements OrderedFixtureInterfa
         $manager->persist($formation);
 
         $formation = new Formation();
-        $formation->setCriticality(rand(1,5));
+        $formation->setCriticality(rand(1,4));
         $formation->setGoal("OBJECTIF");
         $formation->setType("TYPE");
         $formation->setSector("SECTEUR");

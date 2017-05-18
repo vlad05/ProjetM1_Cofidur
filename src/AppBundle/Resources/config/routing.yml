@@ -232,6 +232,12 @@ AppBundle_task_down:
 
 
 ### Pages de formation d'opérateurs ###
+#AppBundle_operatorformation_export:
+#    path: /operatorsformations/
+#    methods: [POST,GET]
+#    defaults: { _controller: AppBundle:OperatorFormationExport:exportToPDF}
+    
+
 AppBundle_operatorformation_add:
     path: /operatorformation/add/
     methods: [POST,GET]
