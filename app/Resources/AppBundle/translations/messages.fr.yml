@@ -108,6 +108,7 @@ operatorFormation:
         planned: 'Prévue'
         formed: 'Formé'
         can_form: 'Peut former'
+        retrograted: 'Rétrogradé'
     commentary: 'Commentaire°'
     formerId: 'Identifiant du formateur'
     operatorName: 'Nom de l''opérateur'

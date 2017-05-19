@@ -5,7 +5,7 @@
     <h2><a href="{{ path('AppBundle_about') }}">A propos</a></h2>
     {# Pages accessibles par les utilisateurs#}
     {% if is_granted('ROLE_USER') %}
-    <h2><a href="/profile">Profil</a></h2>
+    <h2><a href="{{ path('AppBundle_profile') }}">Profil</a></h2>
     {% endif %}
     {# Pages accessibles par les administrateurs #}
     {% if is_granted('ROLE_ADMIN') %}

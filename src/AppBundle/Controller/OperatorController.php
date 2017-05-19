@@ -148,10 +148,14 @@ class OperatorController extends Controller
     }
     
     
+    
+    
     //Sert à l'import de tous les salariés à partir d'un fichier PRN (qui vient d'horoquartz)
     public function importAction(Request $request)
     {
 		$fichier = new ImportSalaries();
+		
+	//Code pour faire un upload de fichier : unecessary (fin du code en bas de fonction)
 		//$form = $this->createForm(ImportSalariesType::class, $fichier);
 	
         /*$form = $this->createFormBuilder($fichier)
@@ -187,7 +191,7 @@ class OperatorController extends Controller
 /*************************************************************/
 			$row = 1;
 			$em = $this->getDoctrine()->getManager();
-			//echo "OMGOMGOMG ".$fileName."HAHAHAHA";
+			
 			if (($handle = fopen("/var/www/html/cofidur_projet/salariesTXT.prn", "r")) !== FALSE) {
 				while (($data = fgetcsv($handle, 1000, ";")) !== FALSE) { 
 					$num = count($data);
@@ -262,6 +266,7 @@ class OperatorController extends Controller
 
 /*************************************************************/
 
+	//Code pour faire un upload de fichier : unecessary
             // ... persist the $product variable or any other work
 
             //return $this->redirect($this->generateUrl('app_product_list'));

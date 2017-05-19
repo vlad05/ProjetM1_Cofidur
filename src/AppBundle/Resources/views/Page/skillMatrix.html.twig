@@ -137,6 +137,13 @@
                                     </a>
                                 </td>
                             {% endif %}
+                            {% if 6 == formationValidation[2] %}
+                                <td class="formedRetrograded">
+                                    <a href="{{ path('AppBundle_operatorformation_show', {'idOpForm': operatorsformationsId}) }}">
+                                        {{ formationValidation[2] }}
+                                    </a>
+                                </td>
+                            {% endif %}
                             {% set caseCompleted = "true" %}
                         {% endif %}
                     {% endfor %}

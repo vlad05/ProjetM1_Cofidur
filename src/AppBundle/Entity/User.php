@@ -34,7 +34,7 @@ class User extends BaseUser
      *
      * @Assert\NotBlank(message="Please enter your first name.", groups={"Registration", "Profile"})
      * @Assert\Length(
-     *     min=3,
+     *     min=2,
      *     max=255,
      *     minMessage="The first name is too short.",
      *     maxMessage="The first name is too long.",
@@ -49,7 +49,7 @@ class User extends BaseUser
      *
      * @Assert\NotBlank(message="Please enter your last name.", groups={"Registration", "Profile"})
      * @Assert\Length(
-     *     min=3,
+     *     min=2,
      *     max=255,
      *     minMessage="The last name is too short.",
      *     maxMessage="The last name is too long.",

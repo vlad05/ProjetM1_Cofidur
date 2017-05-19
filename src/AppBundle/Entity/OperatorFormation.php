@@ -23,7 +23,7 @@ class OperatorFormation
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\ManyToOne(targetEntity="User", cascade={"remove"})
      * @ORM\JoinColumn(name="operator_id", referencedColumnName="id")
      */
     private $operator;
@@ -55,6 +55,7 @@ class OperatorFormation
      * 3 => planned
      * 4 => formed
      * 5 => can form
+     * 6 => rétrogradé (gris)
      *
      * @ORM\Column(name="validation", type="integer")
      */
@@ -68,7 +69,7 @@ class OperatorFormation
     private $commentary;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\ManyToOne(targetEntity="User", cascade={"remove"})
      * @ORM\JoinColumn(name="former_id", referencedColumnName="id")
      */
     private $former;

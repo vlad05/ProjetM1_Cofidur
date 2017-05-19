@@ -178,7 +178,7 @@ class SkillMatrixExportController extends Controller
 
             $nbOperatorFormations = count($operatorsformations);
             $nbOperators = count($operators);
-            /* Cette boucle sur le nombre d'opérateurs remplit les colonnes A B C D E et F du fichier avec l'id
+            /* Cette boucle sur le nombre d'opérateurs remplit les colonnes A à F du fichier avec l'id
              * le first name, last name, les supérieurs et le status. */
             for ($i= 0; $i < $nbOperators; ++$i) {
                 $phpExcelObject->setActiveSheetIndex(0)
@@ -286,6 +286,19 @@ class SkillMatrixExportController extends Controller
 											'fill' => array(
 												'type' => PHPExcel_Style_Fill::FILL_SOLID,
 												'color' => array('rgb' => 'e9ff00')
+											)
+										)
+									);								
+								break;
+								// 	
+							case 6:	//rétrogradé (gris)
+								$phpExcelObject->getActiveSheet()
+									->getStyle($currCol.strval($operatorId+1))
+									->applyFromArray(
+										array(
+											'fill' => array(
+												'type' => PHPExcel_Style_Fill::FILL_SOLID,
+												'color' => array('rgb' => '959595')
 											)
 										)
 									);								

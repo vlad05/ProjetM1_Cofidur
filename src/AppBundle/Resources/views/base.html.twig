@@ -63,9 +63,9 @@
                                     <li><a href="{{ path('AppBundle_about') }}">A propos</a></li>
                                     <li><a href="{{ path('AppBundle_contact') }}">Contact</a></li>
                                     {% if is_granted('ROLE_USER') %}
-                                    <li><a href="/profile/change-password">Changer de mot de passe</a></li>
+                                    <li><a href="profile/change-password">Changer de mot de passe</a></li>
                                     {% endif %}
-                                    <li><a href="/profile">Profil</a></li>
+                                    <li><a href="{{ path('AppBundle_profile') }}">Profil</a></li>
                                     {% if is_granted('ROLE_ADMIN') %}
                                     <li><a href="{{ path('AppBundle_admin') }}">Admin</a></li>
                                     {% endif %}
