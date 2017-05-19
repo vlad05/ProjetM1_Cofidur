@@ -147,8 +147,23 @@ class OperatorController extends Controller
         ));
     }
     
-    
-    
+    //Raz du mot de passe (On le fixe à la valeur $operator->getFirstName() : à l'utilisateur de rechanger derrière)
+    public function razAction($idOp)
+    { //http://stackoverflow.com/questions/9183368/symfony2-user-setpassword-updates-password-as-plain-text-datafixtures-fos
+		
+		$em = $this->getDoctrine()->getManager();
+
+        $operator = $em->getRepository('AppBundle:User')->find($idOp);
+		
+		$userManager = $this->container->get('fos_user.user_manager');
+		$operator->setPlainPassword($operator->getFirstName());
+		$userManager->updateUser($operator, false);
+		
+		$em->persist($operator);
+		$em->flush();
+		
+        return $this->redirectToRoute('AppBundle_operator_show_all');
+	}
     
     //Sert à l'import de tous les salariés à partir d'un fichier PRN (qui vient d'horoquartz)
     public function importAction(Request $request)

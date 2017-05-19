@@ -112,6 +112,14 @@ AppBundle_operator_show_all:
     path: /operators
     methods: [GET]
     defaults: { _controller: AppBundle:Operator:showAll}
+    
+AppBundle_operator_raz:
+    path: /operator/raz/{idOp}
+    methods: [GET]
+    defaults: { _controller: AppBundle:Operator:raz}
+    requirements:
+        methods: GET
+        id: \d+
 
 ### page de formation ###
 AppBundle_formation_add:

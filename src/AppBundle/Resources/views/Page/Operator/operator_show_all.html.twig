@@ -51,6 +51,12 @@
 						   window.location.href='{{ path('AppBundle_operator_delete', {'idOp': operator.id}) }}'
 						   }">
 		</td>
+		<td>
+			<input type="button" value="RAZ mdp"
+				   onclick="if(confirm('Remttre à zéro le mot de passe de cet opérateur ?')){
+						   window.location.href='{{ path('AppBundle_operator_raz', {'idOp': operator.id}) }}'
+						   }">
+		</td>
 	</tr>
 {% endfor %}
 </table>
