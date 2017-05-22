@@ -376,3 +376,22 @@ th.verticalite > div > span {
 .area {
   fill: steelblue;
 }
+
+/* Export to pdf */
+@media print {
+	#header {
+		display:none;
+	}
+	#footer {
+		display:none;
+	}
+	img {
+		display:none;
+	}
+	.menu-deroulant {
+		display:none;
+	}
+	table {
+		display:none;
+	}
+}

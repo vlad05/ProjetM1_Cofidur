@@ -416,4 +416,8 @@ class OperatorFormation
     {
         return $this->validation == 1 or $this->validation >= 4;
     }
+    
+    public function __toString() {
+		return $this->operator->getLastName()."".$this->operator->getFirstName()."".strval($this->id);
+	}
 }
