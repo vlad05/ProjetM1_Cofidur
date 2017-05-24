@@ -8,9 +8,12 @@ use AppBundle\Form\Type\ImportSalariesType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
+use Symfony\Component\Security\Core\Role\Role;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+
+
 
 use PHPExcel\IOFactory;
 use DateTime;
@@ -28,6 +31,12 @@ class OperatorController extends Controller
             throw $this->createNotFoundException('Pas d\'opérateur trouvé');
         }
 
+		//$this->container->get('security.role_hierarchy');
+		//$this->get('AppBundle.service.role')->isGranted('ROLE_ADMIN', $operator);
+		$role = array(new Role('ROLE_ADMIN'));
+		$all_roles = $this->get('security.role_hierarchy')->getReachableRoles($role);
+		
+
         $operatorsFormations= $em->getRepository('AppBundle:OperatorFormation')->findBy(array('operator' => $operator));
         $supervisedFormations= $em->getRepository('AppBundle:OperatorFormation')->findBy(array('former' => $operator));
         $subordinates= $em->getRepository('AppBundle:User')->findBy(array('superiorLvl1' => $operator));
@@ -36,7 +45,8 @@ class OperatorController extends Controller
             'operator'     => $operator,
             'operatorsformations' => $operatorsFormations,
             'supervisedFormations' => $supervisedFormations,
-            'subordinates' => $subordinates
+            'subordinates' => $subordinates,
+            'roles' => $all_roles
         ));
     }
 
@@ -72,8 +82,26 @@ class OperatorController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $operator = $em->getRepository('AppBundle:User')->find($idOp);
-
-        $operator->addRole("ROLE_ADMIN");
+        
+//        $operator->addRole("ROLE_ADMIN");
+        
+        if($operator->hasRole("ROLE_QUATHODE")) {
+			$operator->removeRole("ROLE_QUATHODE");
+			$operator->addRole("ROLE_RESPONSABLE");
+		}
+		else if($operator->hasRole("ROLE_RESPONSABLE")) {
+			$operator->removeRole("ROLE_RESPONSABLE");
+			$operator->addRole("ROLE_ADMIN");
+		}
+		else if($operator->hasRole("ROLE_TUTEUR")) {
+			$operator->removeRole("ROLE_TUTEUR");
+			$operator->addRole("ROLE_QUATHODE");
+		}
+		else if($operator->hasRole("ROLE_USER")) {
+			$operator->removeRole("ROLE_USER");
+			$operator->addRole("ROLE_TUTEUR");
+		}
+        
         $em->persist($operator);
         $em->flush();
 
@@ -85,8 +113,24 @@ class OperatorController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $operator = $em->getRepository('AppBundle:User')->find($idOp);
-
-        $operator->removeRole("ROLE_ADMIN");
+		
+		if($operator->hasRole("ROLE_QUATHODE")) {
+			$operator->removeRole("ROLE_QUATHODE");
+			$operator->addRole("ROLE_TUTEUR");
+		}
+		else if($operator->hasRole("ROLE_ADMIN")) {
+			$operator->removeRole("ROLE_ADMIN");
+			$operator->addRole("ROLE_RESPONSABLE");
+		}
+		else if($operator->hasRole("ROLE_RESPONSABLE")) {
+			$operator->removeRole("ROLE_RESPONSABLE");
+			$operator->addRole("ROLE_QUATHODE");
+		}
+		else if($operator->hasRole("ROLE_TUTEUR")) {
+			$operator->removeRole("ROLE_TUTEUR");
+			$operator->addRole("ROLE_USER");
+		}
+        
         $em->persist($operator);
         $em->flush();
 
@@ -117,6 +161,7 @@ class OperatorController extends Controller
         ));
     }
 
+	// TODO : changer mdp de base
     public function addAction(Request $request)
     {
         $operator = new User();
@@ -128,9 +173,9 @@ class OperatorController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $operator = $form->getData();
             $operator->setUsername(strtolower(substr($operator->getFirstName(), 0, 3)) . strtolower($operator->getLastName()));
-            $random = random_bytes(10);
+            $random = random_bytes(10);		//MDP à changer ici
             $operator->setPassword(base64_encode($random));
-
+			$operator->addRole("ROLE_USER");
             $em = $this->getDoctrine()->getManager();
             $em->persist($operator);
             $em->flush();

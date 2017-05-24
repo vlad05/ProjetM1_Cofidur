@@ -12,3 +12,6 @@ services:
  # app_cofidur.skillmatrix:
  #     class: AppBundle\Services\SkillMatrixService
  #     arguments: ['@doctrine.orm.entity_manager']
+ # app_cofidur.service.role:
+ #       class: AppBundle\Services\RoleService
+ #       arguments: [@security.role_hierarchy]
