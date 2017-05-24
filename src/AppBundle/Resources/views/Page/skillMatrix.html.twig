@@ -168,6 +168,7 @@
             <td class="futureFormation"></td>
             <td class="formedValidated"></td>
             <td class="formedToTeach"></td>
+            <td class="formedRetrograded"></td>
         </tr>
         <tr>
             <th class="text_legende">Statut</th>
@@ -176,6 +177,7 @@
             <td class="text_legende">Prévision Formation</td>
             <td class="text_legende">Habilité</td>
             <td class="text_legende">Habilité à former</td>
+            <td class="text_legende">Rétrogradé</td>
         </tr>
     </table>
 
@@ -187,8 +189,6 @@
 
     {% if is_granted('ROLE_USER') %}
     <h2><a href="{{ path('AppBundle_formation_show_all') }}">Formations</a></h2>
-    {% endif %}
-    {% if is_granted('ROLE_ADMIN') %}
     <h2><a href="{{ path('AppBundle_operator_show_all') }}">Opérateurs</a></h2>
     <h2><a href="{{ path('AppBundle_operatorformation_show_all') }}">Formation d'opérateurs</a></h2>
     {% endif %}

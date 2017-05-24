@@ -2,10 +2,10 @@
 
 {% block body %}
 	 
-	
+	{% if is_granted('ROLE_SUPER_ADMIN') %}
 	 <label for="importSalaries">Importer les salariés (à partir d'un fichier .prn)</label> <br />	
 	 <a href="{{ path('AppBundle_operator_import') }}">Importer</a>
-	{#
+	{#		PARTIE A SUPPRIMER
 	{{ form_start(form) }}
 		{{ form_row(form.fichierimport) }}
 	{{ form_end(form) }} 
@@ -15,11 +15,14 @@
 		<input type="file" value="Importer les salariés" name="importSalaries" onclick="{window.location.href='{{ path('AppBundle_operator_import') }}'}"> 
 	</form>
 	#}
+	{% endif %}
+	
 	<h1>Affichage de tous les opérateurs</h1>
 
 <script src="{{ asset('bundles/appcofidur/js/sorttable.js') }}"></script>
-
+	{% if is_granted('ROLE_ADMIN') %}
 	<input type="button" value="Ajouter un opérateur" onclick="{window.location.href='{{ path('AppBundle_operator_add') }}'}">
+	{% endif %}
 	<br/>
 	<br/>
 
@@ -41,7 +44,8 @@
 		</td>
 		<td> {{ operator.firstName }} </td>
         <td> {{ operator.lastName }} </td>
-         <td> {{ operator.dateOfBirth |date("d/m/Y") }} </td>
+        <td> {{ operator.dateOfBirth |date("d/m/Y") }} </td>
+        {% if is_granted('ROLE_ADMIN') %} 
 		<td>
 			<input type="button" value="Editer" onclick="{window.location.href='{{ path('AppBundle_operator_edit', {'idOp': operator.id}) }}'}">
 		</td>
@@ -57,6 +61,7 @@
 						   window.location.href='{{ path('AppBundle_operator_raz', {'idOp': operator.id}) }}'
 						   }">
 		</td>
+		{% endif %}
 	</tr>
 {% endfor %}
 </table>

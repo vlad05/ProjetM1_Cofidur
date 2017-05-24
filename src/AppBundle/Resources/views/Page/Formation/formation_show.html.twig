@@ -6,10 +6,10 @@
 {% endblock %}
 
 {% block body %}
-
+{% if is_granted('ROLE_USER') %}
 	<script type="text/javascript" src="{{ asset('bundles/appcofidur/js/d3.min.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('bundles/appcofidur/js/d3.tip.js') }}"></script>
-
+{% endif %}
 	<h1>Affichage d'une formation</h1>
 
 {% set AERONAUTIC= 1 %}

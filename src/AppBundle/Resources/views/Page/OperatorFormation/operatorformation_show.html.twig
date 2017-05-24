@@ -8,8 +8,9 @@
 {% block body %}
 {# <SCRIPT>	Balise nécéssaire à l'export HTML2PDF  #}
 	{#<a href="{{ path('AppBundle_operatorformation_export'), {'idOp': operator.id} }}"> Exporter la FFO </a>	#}
-	<input type="button" value="Exporter la FFO" onclick="{window.location.href='{{ path('AppBundle_operatorformation_export', {'idOpForm': operatorformation.id}) }}'}">	
-
+	{% if is_granted('ROLE_QUATHODE') %} 
+		<input type="button" value="Exporter la FFO" onclick="{window.location.href='{{ path('AppBundle_operatorformation_export', {'idOpForm': operatorformation.id}) }}'}">	
+	{% endif %}
 {% include "AppBundle:Page/OperatorFormation:operatorformation_show_export.html.twig" %}
 
 {% endblock %}

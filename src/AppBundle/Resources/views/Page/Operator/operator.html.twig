@@ -6,7 +6,7 @@
     {% if is_granted('ROLE_USER') %}
 	<h2><a href="{{ path('AppBundle_formation_show_all') }}">Formations</a></h2>
     {% endif %}
-	{% if is_granted('ROLE_QUATHODE') %}
+	{% if is_granted('ROLE_TUTEUR') %}
     <h2><a href="{{ path('AppBundle_operatorformation_show_all') }}">Formation d'opérateurs</a></h2>
     {% endif %}
     {% if is_granted('ROLE_USER') %}

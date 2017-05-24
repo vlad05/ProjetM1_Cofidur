@@ -4,7 +4,7 @@
 
 {% block body %}
 	<h1>Affichage de toutes les formations</h1>
-
+	{% if is_granted('ROLE_USER') %}
 	<script src="{{ asset('bundles/appcofidur/js/sorttable.js') }}"></script>
 
 	<script type="text/javascript">
@@ -14,6 +14,7 @@
 	</script>
 
 	<input type="button" value="Ajouter une formation" onclick="{window.location.href='{{ path('AppBundle_formation_add') }}'}">
+	{% endif %}
 	<br/>
 	<br/>
 

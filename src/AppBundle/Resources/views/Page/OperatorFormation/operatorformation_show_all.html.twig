@@ -4,8 +4,9 @@
 	<h1>Affichage de toutes les formations d'opérateurs</h1>
 
 <script src="{{ asset('bundles/appcofidur/js/sorttable.js') }}"></script>
-
+	{% if is_granted('ROLE_QUATHODE') %}
 	<input type="button" value="Faire passer une formation à un opérateur " onclick="{window.location.href='{{ path('AppBundle_operatorformation_add') }}'}">
+	{% endif %}
     <br/>
 	<br/>
 
@@ -56,18 +57,24 @@
 		</td>
 		<td> {{ operatorformation.commentary }} </td>
 		<td> {{ operatorformation.former.username}} </td>
+		{% if is_granted('ROLE_QUATHODE') %}
 		<td class="button">
 			<input type="button" value="Afficher" onclick="{window.location.href='{{ path('AppBundle_operatorformation_show', {'idOpForm': operatorformation.id}) }}'}">
 		</td>
+		{% endif %}
+		{% if is_granted('ROLE_RESPONSABLE') %}
 		<td class="button">
 			<input type="button" value="Editer" onclick="{window.location.href='{{ path('AppBundle_operatorformation_edit', {'idOpForm': operatorformation.id}) }}'}">
 		</td>
+		{% if is_granted('ROLE_ADMIN') %}
 		<td class="button">
 			<input type="button" value="Supprimer"
 				   onclick="if(confirm('Supprimer la catégorie ?')){
 						   window.location.href='{{ path('AppBundle_operatorformation_delete', {'idOpForm': operatorformation.id}) }}'
 						   }">
 		</td>
+		{% endif %}
+		{% endif %}
 	</tr>
 {% endfor %}
 </table>

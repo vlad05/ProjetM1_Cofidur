@@ -80,22 +80,6 @@
            
             <button id="display_subordinates" onclick={window.location.href="{{ path('AppBundle_operator_setAdmin', {'idOp': operator.id}) }}"}>Promouvoir Tuteur</button>
            
-          {#
-            <form>
-				<select name="form_role" id="role" size="1">
-					<option disabled selected> Changer le rôle </option>
-					{% for role in roles %}
-					<option> {{ role.role }} </option>
-					
-					<option> <button id="display_subordinates" onclick={window.location.href="{{ path('AppBundle_operator_setAdmin', {'idOp': operator.id}) }}"}> {{ role.role }} </button> </option
-					
-					{% endfor %}
-				</select>			
-					
-				<input type="submit" value="Modifier" id="display_subordinates" onClick={window.location.href="{{ path('AppBundle_operator_setAdmin', {'idOp': operator.id}) }}"} />	
-					 
-			</form>
-		 #}
             {% endif %}
         {% endif %}
         </td>
@@ -120,7 +104,7 @@
 		{% endfor %}
 	</table>
 	{% else %}
-		<h3>Vous n'êtes le chef d'aucun opérateur, désolé !</h3>
+		<h3>Vous n'êtes le chef d'aucun opérateur.</h3>
 	{% endif %}
 </div>
 
@@ -164,7 +148,7 @@
 	{% endfor %}
 </table>
 {% else %}
-	<h3>Cet opérateur n'a encore suivi aucune formation</h3>
+	<h3>Cet opérateur n'a encore suivi aucune formation.</h3>
 {% endif %}
 
 {# Formations supervisées par l'opérateur #}
@@ -188,7 +172,7 @@
 
 	</table>
 {% else %}
-	<h3>Cet opérateur n'a encore supervisé aucune formation</h3>
+	<h3>Cet opérateur n'a encore supervisé aucune formation.</h3>
 {% endif %}
 
 {% endblock %}

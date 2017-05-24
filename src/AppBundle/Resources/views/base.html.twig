@@ -54,8 +54,10 @@
 										<li><a href="{{ path('AppBundle_skillMatrix') }}">Matrice de compétence</a></li>
 										{#<li><a href="/register">S'enregistrer</a></li>#}
 										{#<li><a href="{{ path('AppBundle_register') }}">S'enregistrer</a></li>#}
+										{% if is_granted('ROLE_SUPER_ADMIN') %}
 										<li><a href="/_error/404">Test 404</a></li>
 										<li><a href="/_error/403">Test 403</a></li>
+										{% endif %}
 									{% endif %}
                                 </ul>
                             </li>
