@@ -3,7 +3,7 @@
 	<!--
 		INFORMATIONS SUR LE TUTEUR, L'OPERATEUR ET LES DATES
 	-->
-	<fieldset class="sumup operatorformation">	
+	<fieldset class="sumup operatorformation">
 		<legend>Informations</legend>
 		<table class="infos operator">
 			<tr>
@@ -86,7 +86,7 @@
 			</tr>
 			<tr>
 				<th>Objectif visé</th>
-				<td > {{ operatorformation.formation.goal}}</td>
+				<td > {{ operatorformation.formation.goal }}</td>
 			</tr>
 			<tr>
 				<th>Moyens pédagogiques</th>
@@ -108,7 +108,7 @@
 			 a été créée. (opeCat à null dans ce cas)
 		-->
 	{% for category in operatorformation.formation.categories %}
-        {% include 'AppBundle::Page/OperatorCategory/operatorcategory_show.html.twig' %}
+        {% include 'AppBundle::Page/OperatorCategory/operatorcategory_export_show.html.twig' %}
 
         {% set indice_category= indice_category+1 %}
     {% endfor %}

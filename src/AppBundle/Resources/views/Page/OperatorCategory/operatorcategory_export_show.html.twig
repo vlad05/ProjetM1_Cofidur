@@ -1,0 +1,67 @@
+<nobreak>
+{% set validated_category="" %}
+{% set opeCat=null %}
+
+ {# Recherche de la categorie dans l'operatorCategory#}
+{% for operatorCategory in operatorformation.operatorcategories %}
+    {% if category.id == operatorCategory.category.id %}
+        {% set opeCat= operatorCategory %}
+    {% endif %}
+{% endfor %}{# fin for operatorCategory #}
+
+<fieldset class="details category" id="{{ category.name }}{{ category.id }}">
+    <legend class="category_title">
+        Catégorie : {{ category.name }}
+    </legend>
+    {#
+        Si la catégorie n'est pas trouvée,
+        on indique que la catégorie n'était pas présent lors de la céeation de l'operatorCategory#}
+    {% if null == opeCat%}
+        <h2 class="error">La catégorie n'était pas présente quand l'opérateur à commencer à la passer.
+            <a href="{{ path('AppBundle_operatorformation_add') }}">Faire passer la formation</a>
+        </h2>
+        {#
+        Sinon, affichage de l'avancement de l'opérateur dans la catégorie #}
+    {% else %}
+        <!-- Tâches de la catégorie -->
+        <div class="operatorformation_task_tab">
+            <table>
+                <tr>
+                    <th class="task validation"> </th>
+                    <th class="task name">Nom tache</th>
+                </tr>
+                {% set task_nb= 1 %}
+                {% for task in category.tasks %}
+                    {% include 'AppBundle::Page/OperatorTask/operatortask_export_show.html.twig' %}
+                {% endfor %}{# fin for task #}
+            </table>
+        </div>
+
+        <!-- Informations de la catégorie et de son avancement -->
+        <div id="operatorformation_informations{{ indice_category }}" class="infos operatorformation">
+            <table>
+                <tr>
+                    <th>Date signature</th>
+                    <td>{{ opeCat.dateSignature|date("m/d/Y") }}</td>
+                </tr>
+                <tr>
+                    <th>Nombre d'heures</th>
+                    <td>{{ opeCat.nbHours|date("H:i")}}</td>
+                </tr>
+                <tr>
+                    {% if opeCat.trainer != null %}
+                        {% set validated_category= true %}
+                        <th>Formateur</th>
+                        <td>{{ opeCat.trainer.username }}</td>
+                    {% endif %}
+                </tr>
+            </table>
+        </div>
+
+
+    {% endif %}
+</fieldset>
+<br>
+<br>
+<br>
+</nobreak>

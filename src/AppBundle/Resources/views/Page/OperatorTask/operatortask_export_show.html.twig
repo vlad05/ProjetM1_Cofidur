@@ -1,0 +1,19 @@
+{% set task_found= 0 %}
+{% for opeTask in opeCat.operatortasks %}
+    {% if opeTask.task.id == task.id %}
+        {% set task_found= 1 %}
+        <tr>
+            <td><input type="checkbox" name="validated" disabled checked="checked"></td>
+            <td class="large">{{ task.name }}</td>
+        </tr>
+    {% endif %}
+{% endfor %}{# fin for opeTask #}
+{% if task_found == 0 %}
+    <tr>
+        <td>
+            <input type="checkbox" name="validated" disabled>
+        </td>
+        <td class="large">{{ task.name }}</td>
+    </tr>
+
+{% endif %}
