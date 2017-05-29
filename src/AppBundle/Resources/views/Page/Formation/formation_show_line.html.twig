@@ -7,7 +7,7 @@
     <td title="{{formation.validityTime}}"> {{ formation.validityTime  }} jour(s)</td>
     <td> {{ formation.criticality }} </td>
     <td> {{ formationsNbFormed[formation.id-1] }} ({{ formationsNbFormedTot[formation.id-1] }}) / {{ formationsNbFormer[formation.id-1] }} {#({{ formationsNbFormerTot[formation.id-1] }})#}</td>
-    {% if is_granted('ROLE_ADMIN') %}
+    {% if is_granted('ROLE_QUATHODE') %}
     <td>
     {#<td> {{ formation.criticality }} </td>#}
         {#{% if is_granted('ROLE_ADMIN') %}#}
@@ -24,7 +24,7 @@
 							   }">
     </td>
     {% else %}
-    {% if is_granted('ROLE_USER') %}
+    {% if is_granted('ROLE_TUTEUR') %}
     <td>
         <input type="button" value="Afficher" onclick="{window.location.href='{{ path('AppBundle_formation_show', {'idForm': formation.id}) }}'}">
         <button id="wanted_formation_button{{ nb_formation }}" onclick="wanted_formation(this.id, {{ formation.id }})">
