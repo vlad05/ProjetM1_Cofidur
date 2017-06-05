@@ -18,29 +18,29 @@ class SkillMatrixExportController extends Controller
 		//"Import" depuis skillMatrixController.php
 		/*******************/
 		$em = $this->getDoctrine()->getManager();
-		
+
 		//traitement général
 		$formations = $em->getRepository('AppBundle:Formation')->findAll();
 		$operators= $em->getRepository('AppBundle:User')->findAll();
 		$operatorsformations= $em->getRepository('AppBundle:OperatorFormation')->findAll();
 		$allConnexions= [];
-            
+
 		$nbOperatorFormations = count($operatorsformations);
-		
-	
+
+
 		/*************************/
-		
+
 		// ask the service for an excel object
 		$phpExcelObject = $this->get('phpexcel')->createPHPExcelObject();
 
-		$phpExcelObject->getProperties()->setCreator("PhpExcel")	
-		   ->setLastModifiedBy("Creator")				
+		$phpExcelObject->getProperties()->setCreator("PhpExcel")
+		   ->setLastModifiedBy("Creator")
 		   ->setTitle("Matrice des FFO")
 		   ->setDescription("Document generated using PHP classes.")
 		   ->setKeywords("office 2005 openxml php")
-		   ->setCategory("Test result file");
-		
-		
+		   ->setCategory("MatriceFFO");
+
+
 		/**************************************************************************/
 		/*
 		 * Copié-collé de code de SkillMatrixController (pasbien)
@@ -48,7 +48,7 @@ class SkillMatrixExportController extends Controller
 		$form = $this->createForm(SkillMatrixType::class);
 
         $form->handleRequest($request);
-	
+
         if ($form->isSubmitted() && $form->isValid()) {
             //traitement spécifique au formulaire
             $allConnexions= [];
@@ -141,7 +141,7 @@ class SkillMatrixExportController extends Controller
 			->setCellValue('D1', 'N+1')
 			->setCellValue('E1', 'N+2')
 			->setCellValue('F1', 'Statut');
-			
+
             $nbOperatorFormations = count($operatorsformations);
             for ($i= 0; $i < $nbOperatorFormations+2; ++$i) {
                 $operatorId= $operatorsformations[$i]->getOperator()->getId();
@@ -154,11 +154,9 @@ class SkillMatrixExportController extends Controller
 				->setCellValue('B'.$i+2, $formationId)
 				->setCellValue('C'.$i+2, $validation)
 				->setCellValue('D'.$i+2, $operatorsformationsId);
-				//->setCellValue('E'.$i, $operatorID);
-				//->setCellValue('F'.$i, $operatorID);
             }
-        }else{ 
-     
+        }else{
+
 
 
 			$phpExcelObject->setActiveSheetIndex(0)
@@ -167,10 +165,10 @@ class SkillMatrixExportController extends Controller
 			->setCellValue('C1', 'Prénom')
 			->setCellValue('D1', 'N+1')
 			->setCellValue('E1', 'N+2')
-			->setCellValue('F1', 'Statut');	
+			->setCellValue('F1', 'Statut');
 
 			/* Boucle sur le nombre de formations pour les afficher en colonne */
-			$nbFormations = count($formations);			
+			$nbFormations = count($formations);
 			for($j = 0; $j < $nbFormations; ++$j) {
 				$phpExcelObject->setActiveSheetIndex(0)
 					->setCellValueByColumnAndRow($j+6, 1, $formations[$j]->getName());
@@ -188,7 +186,7 @@ class SkillMatrixExportController extends Controller
 				->setCellValue('D'.strval($i+2), $operators[$i]->getSuperiorLvl1())
 				->setCellValue('E'.strval($i+2), $operators[$i]->getSuperiorLvl2());
 				switch($operators[$i]->getStatus()) {
-					case 1 : // Iterim 
+					case 1 : // Iterim
 						$phpExcelObject->setActiveSheetIndex(0)->setCellValue('F'.strval($i+2), "Iterim");
 						break;
 					case 2 : // CDD
@@ -202,31 +200,31 @@ class SkillMatrixExportController extends Controller
 				//->setCellValue('C'.strval($i+2), $validation)
 				//->setCellValue('D'.strval($i+2), $operatorsformationsId);
             }
-			
+
 			/* Boucle sur le nombre d'opérateurs en formation pour remplir le reste de la matrice */
-			/* + boucle sur le nombre de formations 
+			/* + boucle sur le nombre de formations
 			 * + set des couleurs de la matrice en fonction de la valeur de la case (switch) */
 			for($i = 0; $i < $nbOperatorFormations; ++$i) {
 				$operatorId= $operatorsformations[$i]->getOperator()->getId();
 				$formationId= $operatorsformations[$i]->getFormation()->getId();
 				$validation= $operatorsformations[$i]->getValidation();
 				$operatorsformationsId= $operatorsformations[$i]->getId();
-				
+
 				//Colonne de départ (sera incrémentée)
 				$colG = 'G';
 				$currColIndex = PHPExcel_Cell::columnIndexFromString($colG);
 				$newIndex = $currColIndex;
 				$currCol = $colG;
-				
+
 				//Boucle sur les colonnes
-				for($j=0; $j<$nbFormations; ++$j) { 
+				for($j=0; $j<$nbFormations; ++$j) {
 					//Si la formation de l'opérateur est égale au nom de la form (en colonne) de la matrice, alors on remplit la valeur
 					if($operatorsformations[$i]->getFormation()->getName() == $phpExcelObject->getActiveSheet()->getCellByColumnAndRow($j+6, 1)->getValue()) {
-						
+
 						//Inscrit la valeur de la validation dans la case correspondante
-						$phpExcelObject->setActiveSheetIndex(0) 
+						$phpExcelObject->setActiveSheetIndex(0)
 							->setCellValueByColumnAndRow($j+6, $operatorId+1, $operatorsformations[$i]->getValidation());
-						
+
 						//switch de coloriage
 						switch($operatorsformations[$i]->getValidation()) {
 							case 1:	//Formé non habilité (orange)
@@ -252,7 +250,7 @@ class SkillMatrixExportController extends Controller
 												'color' => array('rgb' => 'e20b0b')
 											)
 										)
-									);								
+									);
 								break;
 							case 3: //Prévision formation (bleu)
 								$phpExcelObject->getActiveSheet()
@@ -264,7 +262,7 @@ class SkillMatrixExportController extends Controller
 												'color' => array('rgb' => '0059ad')
 											)
 										)
-									);								
+									);
 								break;
 							case 4:	//habilité	(vert)
 								$phpExcelObject->getActiveSheet()
@@ -276,7 +274,7 @@ class SkillMatrixExportController extends Controller
 												'color' => array('rgb' => '00ad14')
 											)
 										)
-									);								
+									);
 								break;
 							case 5:	//habilité à former (jaune)
 								$phpExcelObject->getActiveSheet()
@@ -288,9 +286,9 @@ class SkillMatrixExportController extends Controller
 												'color' => array('rgb' => 'e9ff00')
 											)
 										)
-									);								
+									);
 								break;
-								// 	
+								//
 							case 6:	//rétrogradé (gris)
 								$phpExcelObject->getActiveSheet()
 									->getStyle($currCol.strval($operatorId+1))
@@ -301,7 +299,7 @@ class SkillMatrixExportController extends Controller
 												'color' => array('rgb' => '959595')
 											)
 										)
-									);								
+									);
 								break;
 						}
 					}
@@ -309,13 +307,13 @@ class SkillMatrixExportController extends Controller
 					$currCol = PHPExcel_Cell::stringFromColumnIndex($newIndex -1);
 				}
 			}
-			
+
 
         }
-        
-        /*************************************************************************/   
-		
-		
+
+        /*************************************************************************/
+
+
 		$phpExcelObject->getActiveSheet()->setTitle('Matrice de compétences');
 		// Set active sheet index to the first sheet, so Excel opens this as the first sheet
 		$phpExcelObject->setActiveSheetIndex(0);

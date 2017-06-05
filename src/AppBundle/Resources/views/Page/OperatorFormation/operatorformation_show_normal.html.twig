@@ -18,7 +18,7 @@
 				<th>Service</th>
 				<td > SERVICE--{{ operatorformation.operator }}??</td>
 			</tr>
-		</table> <!-- Fin table info operator -->
+		</table>
 
 		<table class="infos tutor">
             <tr>
@@ -27,7 +27,7 @@
             <tr>
 				<td>{{ operatorformation.former.firstName }} {{ operatorformation.former.lastName }}</td>
             </tr>
-		</table> <!-- Fin table info tutor -->
+		</table>
 
 		<table class="dates operatorformation">
 			<tr>
@@ -67,9 +67,9 @@
                 <th colspan="2">Pas d'invalidation sur cette formation</th>
                     {% endif %}
                 {% endif %}
+            </tr>
 
-
-		</table> <!-- Fin table operatorformation -->
+		</table>
 	</fieldset>
 
 	<!--
@@ -108,7 +108,7 @@
 			 a été créée. (opeCat à null dans ce cas)
 		-->
 	{% for category in operatorformation.formation.categories %}
-        {% include 'AppBundle::Page/OperatorCategory/operatorcategory_export_show.html.twig' %}
+        {% include 'AppBundle::Page/OperatorCategory/operatorcategory_show.html.twig' %}
 
         {% set indice_category= indice_category+1 %}
     {% endfor %}

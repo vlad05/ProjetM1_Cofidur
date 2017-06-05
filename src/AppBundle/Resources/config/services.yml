@@ -8,10 +8,16 @@ services:
       arguments: ['@router']
       tags:
           - { name: kernel.event_subscriber }
-       
+
  # app_cofidur.skillmatrix:
  #     class: AppBundle\Services\SkillMatrixService
  #     arguments: ['@doctrine.orm.entity_manager']
  # app_cofidur.service.role:
  #       class: AppBundle\Services\RoleService
  #       arguments: [@security.role_hierarchy]
+
+ # app_cofidur.greet_command:
+ #     class: AppBundle\Command\GreetCommand
+ #     name: 'mycommand:start'
+ #     tags:
+ #         - { name: console.command }
