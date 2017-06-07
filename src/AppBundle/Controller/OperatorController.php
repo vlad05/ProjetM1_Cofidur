@@ -177,6 +177,8 @@ class OperatorController extends Controller
             $operator->setPassword(base64_encode(strtolower($operator->getFirstName())));	//Le pwd est le prénom en minuscule
 			$operator->addRole("ROLE_USER");
             $em = $this->getDoctrine()->getManager();
+
+            $operator->setEnabled(true);	//Active le compte à la création (sinon on peut pas se connecter avec)
             $em->persist($operator);
             $em->flush();
 
