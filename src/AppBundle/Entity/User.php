@@ -19,6 +19,15 @@ use FOS\UserBundle\Model\User as BaseUser;
  */
 class User extends BaseUser
 {
+
+	public function __construct() {
+		parent::__construct();
+		$this->setFirstName("");
+		$this->setLastName("");
+		$this->setStatus(1);
+	}
+
+
     /**
      * @var integer
      *
@@ -30,7 +39,7 @@ class User extends BaseUser
 
     /**
      * @var string
-     * @ORM\Column(name="first_name", type="string", length=255)
+     * @ORM\Column(name="first_name", type="string", length=255, nullable=true)
      *
      * @Assert\NotBlank(message="Please enter your first name.", groups={"Registration", "Profile"})
      * @Assert\Length(
@@ -97,8 +106,8 @@ class User extends BaseUser
      * @ORM\Column(name="site", type="string", nullable=true)
      */
     private $site;
-    
-     /**	
+
+     /**
      * @var \DateTime
      *
      * @ORM\Column(name="date_entree", type="date", nullable=true)
@@ -282,8 +291,8 @@ class User extends BaseUser
 
         return $this;
     }
-    
-     /**	
+
+     /**
      * Get site
      *
      * @return string
@@ -292,8 +301,8 @@ class User extends BaseUser
     {
         return $this->site;
     }
-    
-    /**	
+
+    /**
      * Set site
      *
      * @param string $registrationNumber
@@ -306,8 +315,8 @@ class User extends BaseUser
 
         return $this;
     }
-    
-     /**	
+
+     /**
      * Set dateEntree
      *
      * @param \DateTime $dateEntree
@@ -320,8 +329,8 @@ class User extends BaseUser
 
         return $this;
     }
-	
-    /**		
+
+    /**
      * Get dateEntree
      *
      * @return \DateTime
@@ -330,6 +339,6 @@ class User extends BaseUser
     {
         return $this->dateEntree;
     }
-    
+
 
 }

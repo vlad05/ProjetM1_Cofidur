@@ -10,7 +10,7 @@ Cofidur EMS {{ status_text }}
 	<p class="error">Seules les personnes avec le bon niveau d'accréditation sont autorisées à y accéder. <a href="/">Retour à l'accueil</a></p>
 	{% else %}
     <p class="error">Seules les personnes connectées et avec le bon niveau d'accréditation sont autorisées à y accéder.</p>
-	<p class="error">Nous vous invitons à essayer de <a href="{{ path('AppCofidurBundle_login') }}">vous (re)connecter</a><p>
+	<p class="error">Nous vous invitons à essayer de <a href="{{ path('AppBundle_login') }}">vous (re)connecter</a><p>
 	{% endif %}
 	<p class="error">En cas de problème, <a href="/contact">contactez un administrateur</a></p>
 {% endblock %}
