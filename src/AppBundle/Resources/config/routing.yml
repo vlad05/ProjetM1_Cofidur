@@ -31,11 +31,11 @@ AppBundle_skillMatrix:
     path: /skillMatrix
     methods: [POST, GET]
     defaults: { _controller: AppBundle:SkillMatrix:skillMatrix }
-    
+
 AppBundle_skillMatrix_export:
     path: /skillMatrixExport
     methods: [POST, GET]
-    defaults: { _controller: AppBundle:SkillMatrixExport:skillMatrixExport }    
+    defaults: { _controller: AppBundle:SkillMatrixExport:skillMatrixExport }
 
 ### Pages d'authentifiation ###
 AppBundle_login:
@@ -55,7 +55,6 @@ AppBundle_logout:
 #AppBundle_changePassword:
 #    path: /profile/change-password
 #    defaults : { _controller: FOSUserBundle:Security:change-password}
-
 
 # Pages des opérateurs
 AppBundle_operator_import:
@@ -112,7 +111,7 @@ AppBundle_operator_show_all:
     path: /operators
     methods: [GET]
     defaults: { _controller: AppBundle:Operator:showAll}
-    
+
 AppBundle_operator_raz:
     path: /operator/raz/{idOp}
     methods: [GET]
@@ -219,6 +218,12 @@ AppBundle_task_edit:
         methods: GET
         id: \d+
 
+AppBundle_motivation:
+    path: /motivation
+    methods: [POST, GET]
+    defaults: { _controller: AppBundle:Task:motiv}
+
+
 AppBundle_task_delete:
     path: /task/delete/{idTask}
     methods: [DELETE,GET]
@@ -252,7 +257,7 @@ AppBundle_operatorformation_export:
     requirements:
         methods: GET
         id: \d+
-    
+
 
 AppBundle_operatorformation_add:
     path: /operatorformation/add/

@@ -1,22 +1,22 @@
 {% extends 'AppBundle::Page/Operator/operator.html.twig' %}
 
 {% block body %}
-	 
+{% if is_granted('ROLE_TUTEUR') %}
 	{% if is_granted('ROLE_SUPER_ADMIN') %}
-	 <label for="importSalaries">Importer les salariés (à partir d'un fichier .prn)</label> <br />	
+	 <label for="importSalaries">Importer les salariés (à partir d'un fichier .prn)</label> <br />
 	 <a href="{{ path('AppBundle_operator_import') }}">Importer</a>
 	{#		PARTIE A SUPPRIMER
 	{{ form_start(form) }}
 		{{ form_row(form.fichierimport) }}
-	{{ form_end(form) }} 
-	
-	
+	{{ form_end(form) }}
+
+
 	<form action="/import" method="post" enctype="multipart/form-data">
-		<input type="file" value="Importer les salariés" name="importSalaries" onclick="{window.location.href='{{ path('AppBundle_operator_import') }}'}"> 
+		<input type="file" value="Importer les salariés" name="importSalaries" onclick="{window.location.href='{{ path('AppBundle_operator_import') }}'}">
 	</form>
 	#}
 	{% endif %}
-	
+
 	<h1>Affichage de tous les opérateurs</h1>
 
 <script src="{{ asset('bundles/appcofidur/js/sorttable.js') }}"></script>
@@ -26,13 +26,44 @@
 	<br/>
 	<br/>
 
+{#
+<script src="{{ asset('bundles/appcofidur/js/sorttable.js') }}"></script>
+
+    <script type="text/javascript">
+        function show_ope_form(){
+            var m_form= document.getElementById("form_ope");
+
+            if(m_form.style.display == "block"){
+                m_form.style.display= "none";
+            } else {
+                m_form.style.display= "block";
+            }
+        }
+    </script>
+
+    <a href="#" onclick="show_ope_form()">Afficher/Cacher le formulaire</a>
+    <br/>
+    <br>
+    <div id="form_ope" style="display:none;">
+		<a href="{{ path('AppBundle_operator_show_all') }}">Remise à zéro...</a>
+		<br>
+		<br>
+		{{ form_start(form) }}
+		{{ form_errors(form) }}
+		{{ form_widget(form) }}
+		{{ form_end(form) }}
+    </div>
+#}
+
 	<table class="sortable">
 	<tr>
         <th>MAT.</th>
 		<th> NOM D'UTILISATEUR </th>
         <th> PRENOM </th>
         <th> NOM </th>
-		<th> DATE DE NAISSANCE </th>
+		<th> DATE D'ENTREE </th>
+		<th> Sup 1 </th>
+		<th> Sup 2 </th>
 	</tr>
 {% for operator in operators %}
 	<tr>
@@ -44,8 +75,10 @@
 		</td>
 		<td> {{ operator.firstName }} </td>
         <td> {{ operator.lastName }} </td>
-        <td> {{ operator.dateOfBirth |date("d/m/Y") }} </td>
-        {% if is_granted('ROLE_ADMIN') %} 
+        <td> {{ operator.dateEntree|date("d/m/Y") }} </td>
+        <td> {{ operator.superiorLvl1 }} </td>
+        <td> {{ operator.superiorLvl2 }} </td>
+        {% if is_granted('ROLE_ADMIN') %}
 		<td>
 			<input type="button" value="Editer" onclick="{window.location.href='{{ path('AppBundle_operator_edit', {'idOp': operator.id}) }}'}">
 		</td>
@@ -57,7 +90,7 @@
 		</td>
 		<td>
 			<input type="button" value="RAZ mdp"
-				   onclick="if(confirm('Remttre à zéro le mot de passe de cet opérateur ?')){
+				   onclick="if(confirm('Réinitialiser le mot de passe de cet opérateur à son prénom ?')){
 						   window.location.href='{{ path('AppBundle_operator_raz', {'idOp': operator.id}) }}'
 						   }">
 		</td>
@@ -65,5 +98,5 @@
 	</tr>
 {% endfor %}
 </table>
-
+{% endif %}
 {% endblock %}

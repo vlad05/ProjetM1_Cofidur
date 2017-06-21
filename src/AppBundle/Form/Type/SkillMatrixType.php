@@ -13,9 +13,18 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 class SkillMatrixType extends AbstractType
 {
 
+	//Construit le formulaire de tri présent sur la page SkillMatrix
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder   
+        $builder
+			->add('lastName', EntityType::class,
+                array(
+                    'class'  => 'AppBundle:User',
+                    'choice_label' => 'lastnamefirstname',
+                    'required' => false,
+                    'label_format' => 'operator.lastName',
+                )
+            )
             ->add('formation', EntityType::class,
                 array(
                     'class'  => 'AppBundle:Formation',
@@ -23,7 +32,7 @@ class SkillMatrixType extends AbstractType
                     'required' => false,
                     'label_format' => 'formation.title',
                 )
-            )   
+            )
             ->add('criticality', ChoiceType::class,
                array('label_format' => 'formation.criticality',
                     'choices'  => array(
@@ -31,7 +40,7 @@ class SkillMatrixType extends AbstractType
                         2 => '2',
                         3 => '3',
                         4 => '4',
-                    ),                    
+                    ),
                     'required' => false,
                 )
             )
@@ -47,23 +56,23 @@ class SkillMatrixType extends AbstractType
                     'required' => false,
                     'label_format' => 'operatorFormation.qualification',
                 )
-            ) 
+            )
             ->add('superiorLvl1', EntityType::class,
                 array(
                     'class'  => 'AppBundle:User',
-                    'choice_label' => 'username',
+                    'choice_label' => 'lastname',
                     'required' => false,
                     'label_format' => 'operator.superior1',
                 )
-            ) 
+            )
             ->add('superiorLvl2', EntityType::class,
                 array(
                     'class'  => 'AppBundle:User',
-                    'choice_label' => 'username',
+                    'choice_label' => 'lastname',
                     'required' => false,
                     'label_format' => 'operator.superior2',
                 )
-            )     
+            )
             ->add('status', ChoiceType::class,
                 array(
                     'choices'  => array(

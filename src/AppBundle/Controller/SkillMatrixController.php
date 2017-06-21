@@ -12,7 +12,7 @@ class SkillMatrixController extends Controller
     public function skillMatrixAction(Request $request)
     {
         /* $matrice = $this->container->get('app_cofidur.skillmatrix');
-        
+
         return $matrice->skillMatrix();
         */
 		$em = $this->getDoctrine()->getManager();
@@ -28,6 +28,11 @@ class SkillMatrixController extends Controller
             $formationTabRecherche = [];
             $operatorTabRecherche = [];
             $operatorformationTabRecheche = [];
+
+            //Nom et prénom
+            if($form["lastName"]->getData() != null){
+                $operatorTabRecherche["lastName"] = $form["lastName"]->getData()->getLastName();
+            }
 
             //qualifications
             if($form["qualification"]->getData() != null){
@@ -138,7 +143,7 @@ class SkillMatrixController extends Controller
             'formations'                   => $formations,
             'operators'                    => $operators,
             'formationsValidation'         => $allConnexions,
-        )); 
+        ));
     }
 
 }

@@ -6,6 +6,8 @@
 {% endblock %}
 
 {% block body %}
+
+
 	<script src="{{ asset('bundles/appcofidur/js/sorttable.js') }}"></script>
 	<script type="text/javascript">
 		function display_subordinates(){
@@ -47,39 +49,39 @@
         <td>
         {% if operator.hasRole("ROLE_ADMIN") %}
             Administrateur
-            {% if is_granted('ROLE_SUPER_ADMIN') %}
+            {% if is_granted('ROLE_ADMIN') %}
             </td><td>
-				
+
 				<button id="display_subordinates" onclick={window.location.href="{{ path('AppBundle_operator_unsetAdmin', {'idOp': operator.id}) }}"}>Rétrograder</button>
-				
+
 
             {% endif %}
         {% elseif operator.hasRole("ROLE_RESPONSABLE") %}
 			Responsable
-			{% if is_granted('ROLE_SUPER_ADMIN') %}
+			{% if is_granted('ROLE_ADMIN') %}
 			</td><td><button id="display_subordinates" onclick={window.location.href="{{ path('AppBundle_operator_setAdmin', {'idOp': operator.id}) }}"}>Promouvoir Admin</button>
             </td><td><button id="display_subordinates" onclick={window.location.href="{{ path('AppBundle_operator_unsetAdmin', {'idOp': operator.id}) }}"}>Rétrograder</button>
             {% endif %}
         {% elseif operator.hasRole("ROLE_QUATHODE") %}
 			Qualité/Méthode
-			{% if is_granted('ROLE_SUPER_ADMIN') %}
+			{% if is_granted('ROLE_ADMIN') %}
 			</td><td><button id="display_subordinates" onclick={window.location.href="{{ path('AppBundle_operator_setAdmin', {'idOp': operator.id}) }}"}>Promouvoir Responsable</button>
             </td><td><button id="display_subordinates" onclick={window.location.href="{{ path('AppBundle_operator_unsetAdmin', {'idOp': operator.id}) }}"}>Rétrograder</button>
             {% endif %}
 		{% elseif operator.hasRole("ROLE_TUTEUR") %}
 			Tuteur
-			{% if is_granted('ROLE_SUPER_ADMIN') %}
+			{% if is_granted('ROLE_ADMIN') %}
 			</td><td><button id="display_subordinates" onclick={window.location.href="{{ path('AppBundle_operator_setAdmin', {'idOp': operator.id}) }}"}>Promouvoir Qualité/Méthode</button>
             </td><td><button id="display_subordinates" onclick={window.location.href="{{ path('AppBundle_operator_unsetAdmin', {'idOp': operator.id}) }}"}>Rétrograder</button>
-            {% endif %}        
+            {% endif %}
         {% elseif operator.hasRole("ROLE_USER") %}
             Utilisateur
-            {% if is_granted('ROLE_SUPER_ADMIN') %}
+            {% if is_granted('ROLE_ADMIN') %}
             {#</td><td><a href="{{ path('AppBundle_operator_setAdmin', {'idOp': operator.id}) }}">Promouvoir</a>#}
             </td><td>
-           
+
             <button id="display_subordinates" onclick={window.location.href="{{ path('AppBundle_operator_setAdmin', {'idOp': operator.id}) }}"}>Promouvoir Tuteur</button>
-           
+
             {% endif %}
         {% endif %}
         </td>
@@ -88,7 +90,10 @@
 <br/>
 <br/>
 
-<button id="display_subordinates" onclick="display_subordinates()">Afficher/Cacher les subalternes</button>
+{% if is_granted('ROLE_QUATHODE') %}
+	<button id="display_subordinates" onclick="display_subordinates()">Afficher/Cacher les subalternes</button>
+{% endif %}
+
 <div id="subordinates_list" style="display: none">
 	{% if subordinates %}
 	<h3>Liste des subalternes de {{ operator.firstname }} {{ operator.lastname }} :</h3>

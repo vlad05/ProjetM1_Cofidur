@@ -55,6 +55,7 @@ class OperatorFormationType extends AbstractType
                         'operatorFormation.validationChoices.can_form' => 5,
                         'operatorFormation.validationChoices.retrograted' => 6,
                     ),
+                    'preferred_choices' => array(3),
                     'label_format' => 'operatorFormation.validationStatus',
                 )
             )

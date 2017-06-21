@@ -25,6 +25,8 @@ class User extends BaseUser
 		$this->setFirstName("");
 		$this->setLastName("");
 		$this->setStatus(1);
+		$this->dateEntree = new \DateTime();
+
 	}
 
 
@@ -170,6 +172,16 @@ class User extends BaseUser
     public function getLastName()
     {
         return $this->lastName;
+    }
+
+     /**
+     * Get lastNameFirstName
+     *
+     * @return string
+     */
+    public function getLastNameFirstName()
+    {
+        return $this->lastName." ".$this->firstName;
     }
 
     /**

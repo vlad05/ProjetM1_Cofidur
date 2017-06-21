@@ -34,7 +34,7 @@
                     <nav>
                         {% if is_granted('ROLE_USER') %}
                         <p class="connected navigation">
-                            Connecté en tant que <b> <a href="{{path('AppBundle_operator_show', {'idOp': app.user.id})}}">{{ app.user.username }}</a></b>
+                            Connecté en tant que <b> <a href="{{path('AppBundle_operator_show', {'idOp': app.user.id})}}">{{app.user.firstname}} {{ app.user.lastname }}</a></b>
                         </p>
                         {% endif %}
                         <ul class="navigation menu-deroulant">
@@ -48,7 +48,9 @@
                             <li><a href="#">Divers</a>
                                 <ul>
                                     <li><a href="{{ path('AppBundle_formation_show_all') }}">Formations</a></li>
-                                    <li><a href="{{ path('AppBundle_operator_show_all') }}">Opérateurs</a></li>
+                                    {% if is_granted('ROLE_TUTEUR') %}
+										<li><a href="{{ path('AppBundle_operator_show_all') }}">Opérateurs</a></li>
+									{% endif %}
                                     <li><a href="{{ path('AppBundle_operatorformation_show_all') }}">Formations des Opérateurs</a></li>
                                     {% if is_granted('ROLE_QUATHODE') %}
 										<li><a href="{{ path('AppBundle_skillMatrix') }}">Matrice de compétence</a></li>
@@ -68,8 +70,8 @@
                                     <li><a href="{{ path('AppBundle_contact') }}">Contact</a></li>
                                     {% if is_granted('ROLE_USER') %}
                                     <li><a href="profile/change-password">Changer de mot de passe</a></li>
+                                    <li><a href="{{ path('AppBundle_operator_show', {'idOp': app.user.id}) }}">Profil</a></li>
                                     {% endif %}
-                                    <li><a href="{{ path('AppBundle_profile') }}">Profil</a></li>
                                     {% if is_granted('ROLE_ADMIN') %}
                                     <li><a href="{{ path('AppBundle_admin') }}">Admin</a></li>
                                     {% endif %}

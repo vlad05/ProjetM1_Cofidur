@@ -21,6 +21,11 @@ use DateTime;
 class OperatorController extends Controller
 {
 
+	/*public function operatorAction(Request $request)
+	{
+
+	}*/
+
     public function showAction($idOp)
     {
         $em = $this->getDoctrine()->getManager();
@@ -36,7 +41,6 @@ class OperatorController extends Controller
 		$role = array(new Role('ROLE_ADMIN'));
 		$all_roles = $this->get('security.role_hierarchy')->getReachableRoles($role);
 
-
         $operatorsFormations= $em->getRepository('AppBundle:OperatorFormation')->findBy(array('operator' => $operator));
         $supervisedFormations= $em->getRepository('AppBundle:OperatorFormation')->findBy(array('former' => $operator));
         $subordinates= $em->getRepository('AppBundle:User')->findBy(array('superiorLvl1' => $operator));
@@ -50,7 +54,7 @@ class OperatorController extends Controller
         ));
     }
 
-    public function showAllAction()
+    public function showAllAction(Request $request)
     {
         $em = $this->getDoctrine()->getRepository('AppBundle:User');
 
@@ -59,6 +63,7 @@ class OperatorController extends Controller
         return $this->render('AppBundle:Page/Operator:operator_show_all.html.twig', array(
             'operators'      => $operators,
         ));
+
     }
 
     public function deleteAction($idOp)
@@ -161,7 +166,7 @@ class OperatorController extends Controller
         ));
     }
 
-	// TODO : changer mdp de base
+	//Premier set du MDP à changer ici
     public function addAction(Request $request)
     {
         $operator = new User();
@@ -172,9 +177,9 @@ class OperatorController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $operator = $form->getData();
-            $operator->setUsername(strtolower(substr($operator->getFirstName(), 0, 3)) . strtolower($operator->getLastName()));
-            //$random = random_bytes(10);		//MDP à changer ici
-            $operator->setPassword(base64_encode(strtolower($operator->getFirstName())));	//Le pwd est le prénom en minuscule
+            $operator->setUsername($operator->getRegistrationNumber());
+            //$random = random_bytes(10);		//Premier set du MDP à changer ici
+            $operator->setPlainPassword($operator->getRegistrationNumber());	//Le pwd est le prénom
 			$operator->addRole("ROLE_USER");
             $em = $this->getDoctrine()->getManager();
 
@@ -203,7 +208,7 @@ class OperatorController extends Controller
         $operator = $em->getRepository('AppBundle:User')->find($idOp);
 
 		$userManager = $this->container->get('fos_user.user_manager');
-		$operator->setPlainPassword($operator->getFirstName());
+		$operator->setPlainPassword($operator->getRegistrationNumber());
 		$userManager->updateUser($operator, false);
 
 		$em->persist($operator);
