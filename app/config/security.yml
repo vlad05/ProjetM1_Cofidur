@@ -60,3 +60,5 @@ security:
         - { path: ^/operator/show, role: ROLE_USER }
         - { path: ^/operator/, role: ROLE_ADMIN }
         - { path: ^/operatorsformations, role: ROLE_QUATHODE }
+        - { path: ^/operators, role: ROLE_TUTEUR }
+        - { path: ^/formations, role: ROLE_TUTEUR }

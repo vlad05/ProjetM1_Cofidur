@@ -2,7 +2,7 @@
 
 
 {% block sidebar_nav %}
-    {% if is_granted('ROLE_USER') %}
+    {% if is_granted('ROLE_TUTEUR') %}
 	<h2>
 	    <a href="{{ path('AppBundle_formation_show_all') }}">
 	        Formations

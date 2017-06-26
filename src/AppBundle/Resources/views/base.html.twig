@@ -66,8 +66,8 @@
                             {% endif %}
                             <li><a href="#">Autres</a>
                                 <ul>
-                                    <li><a href="{{ path('AppBundle_about') }}">A propos</a></li>
-                                    <li><a href="{{ path('AppBundle_contact') }}">Contact</a></li>
+                                    {#<li><a href="{{ path('AppBundle_about') }}">A propos</a></li>
+                                    <li><a href="{{ path('AppBundle_contact') }}">Contact</a></li>#}
                                     {% if is_granted('ROLE_USER') %}
                                     <li><a href="profile/change-password">Changer de mot de passe</a></li>
                                     <li><a href="{{ path('AppBundle_operator_show', {'idOp': app.user.id}) }}">Profil</a></li>
@@ -111,9 +111,9 @@
             </div> <!-- Fin content -->
 
             <div id="footer">
-                {% block footer %}
+                {#{% block footer %}
                 Site de gestion du personnel et des formations Cofidur EMS par DAVID, DE LEEUW, GARNIER, GRANIER--RICHARD
-                {% endblock %}
+                {% endblock %}#}
             </div>
         </section>
 
