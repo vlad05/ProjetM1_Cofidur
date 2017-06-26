@@ -9,9 +9,15 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use AppBundle\Form\Type\SkillMatrixType;
 
+use AppBundle\Services\HistorisationSkillMatrixService;
 
 class SkillMatrixExportController extends Controller
 {
+
+	public function skillMatrixExpAction(/*HistorisationSkillMatrixService $service*/) {
+		//$response = $service->skillMatrix();
+		return $this->container->get('app_cofidur.HistorisationSkillMatrix');
+	}
 
     public function skillMatrixExportAction(Request $request)
     {

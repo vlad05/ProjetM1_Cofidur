@@ -9,8 +9,8 @@ services:
       tags:
           - { name: kernel.event_subscriber }
 
- # app_cofidur.skillmatrix:
- #     class: AppBundle\Services\SkillMatrixService
+  app_cofidur.historisationskillmatrix:
+      class: AppBundle\Services\HistorisationSkillMatrix
  #     arguments: ['@doctrine.orm.entity_manager']
  # app_cofidur.service.role:
  #       class: AppBundle\Services\RoleService
