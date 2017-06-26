@@ -26,6 +26,11 @@ AppBundle_admin:
     methods: [GET]
     defaults: { _controller: AppBundle:Page:admin }
 
+AppBundle_notes_patch:
+    path: /notes
+    methods: [GET]
+    defaults: { _controller: AppBundle:Page:notesVersion}
+
 ### Matrice de compétences ###
 AppBundle_skillMatrix:
     path: /skillMatrix

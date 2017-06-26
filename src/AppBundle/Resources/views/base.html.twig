@@ -71,6 +71,7 @@
                                     {% if is_granted('ROLE_USER') %}
                                     <li><a href="profile/change-password">Changer de mot de passe</a></li>
                                     <li><a href="{{ path('AppBundle_operator_show', {'idOp': app.user.id}) }}">Profil</a></li>
+                                    <li><a href="{{ path('AppBundle_notes_patch') }}">Notes de versions</a></li>
                                     {% endif %}
                                     {% if is_granted('ROLE_ADMIN') %}
                                     <li><a href="{{ path('AppBundle_admin') }}">Admin</a></li>

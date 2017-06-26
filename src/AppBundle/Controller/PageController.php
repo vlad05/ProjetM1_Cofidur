@@ -25,9 +25,14 @@ class PageController extends Controller
     {
         return $this->render('AppBundle:Page:admin.html.twig');
     }
-    
+
     public function profileAction()
     {
 		return $this->render('FOSUserBundle:views:User:user_profile.html.twig');
+	}
+
+	public function notesVersionAction()
+	{
+		return $this->render('AppBundle:Page:notesVersions.html.twig');
 	}
 }
