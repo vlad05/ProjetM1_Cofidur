@@ -1,14 +1,21 @@
 {% extends 'AppBundle::base.html.twig' %}
 
 {% block sidebar_nav %}
-    {# Pages accessibles par tout le monde #}
-    <h2><a href="{{ path('AppBundle_about') }}">A propos</a></h2>
+    {# Pages accessibles par tout le monde
+    <h2><a href="{{ path('AppBundle_about') }}">A propos</a></h2>#}
     {# Pages accessibles par les utilisateurs#}
     {% if is_granted('ROLE_USER') %}
     <h2><a href="{{ path('AppBundle_operator_show', {'idOp': app.user.id}) }}">Profil</a></h2>
     {% endif %}
+	{% if is_granted('ROLE_USER') %}
+	{% if is_granted('ROLE_TUTEUR') %}
+		<h2><a href="{{ path('AppBundle_operator_show_all') }}">Opérateurs</a></h2>
+		<h2><a href="{{ path('AppBundle_operatorformation_show_all') }}">Formation d'opérateurs</a></h2>
+	{% endif %}
+	<h2><a href="{{ path('AppBundle_skillMatrix') }}">Matrice de compétences des opérateurs</a></h2>
+	{% endif %}
     {# Pages accessibles par les administrateurs #}
-    {% if is_granted('ROLE_ADMIN') %}
+    {#}{% if is_granted('ROLE_ADMIN') %}
     <h2><a href="{{ path('AppBundle_admin') }}">Administration</a></h2>
-    {% endif %}
+    {% endif %}#}
 {% endblock sidebar_nav %}

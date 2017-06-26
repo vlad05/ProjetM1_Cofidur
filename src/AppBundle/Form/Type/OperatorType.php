@@ -20,7 +20,7 @@ class OperatorType extends AbstractType
         $builder
             ->add('firstName', TextType::class, ['label_format' => 'operator.firstName',])
             ->add('lastName', TextType::class,  ['label_format' => 'operator.lastName',])
-            ->add('registrationNumber', TextType::class,  ['label_format' => 'operator.registrationNumber', 'required' => false,])
+            ->add('registrationNumber', TextType::class,  ['label_format' => 'operator.registrationNumber', 'required' => true,])
             /*->add('dateOfBirth', DateType::class, array(
                 'label_format' => 'security.login.dateOfBirth',
                 'placeholder' => array(

@@ -56,10 +56,10 @@
 										<li><a href="{{ path('AppBundle_skillMatrix') }}">Matrice de compétence</a></li>
 										{#<li><a href="/register">S'enregistrer</a></li>#}
 										{#<li><a href="{{ path('AppBundle_register') }}">S'enregistrer</a></li>#}
-										{% if is_granted('ROLE_SUPER_ADMIN') %}
+										{#{% if is_granted('ROLE_SUPER_ADMIN') %}
 										<li><a href="/_error/404">Test 404</a></li>
 										<li><a href="/_error/403">Test 403</a></li>
-										{% endif %}
+										{% endif %}#}
 									{% endif %}
                                 </ul>
                             </li>
@@ -73,9 +73,9 @@
                                     <li><a href="{{ path('AppBundle_operator_show', {'idOp': app.user.id}) }}">Profil</a></li>
                                     <li><a href="{{ path('AppBundle_notes_patch') }}">Notes de versions</a></li>
                                     {% endif %}
-                                    {% if is_granted('ROLE_ADMIN') %}
+                                    {#{% if is_granted('ROLE_ADMIN') %}
                                     <li><a href="{{ path('AppBundle_admin') }}">Admin</a></li>
-                                    {% endif %}
+                                    {% endif %}#}
                                 </ul>
                             </li>
                         </ul>

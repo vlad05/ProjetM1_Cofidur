@@ -2,6 +2,7 @@
 
 {% block sidebar_nav %}
 	{% if is_granted('ROLE_USER') %}
+		<h2><a href="{{ path('AppBundle_operator_show', {'idOp': app.user.id}) }}">Profil</a></h2>
 		{% if is_granted('ROLE_TUTEUR') %}
 			<h2><a href="{{ path('AppBundle_operator_show_all') }}">Opérateurs</a></h2>
 			<h2><a href="{{ path('AppBundle_operatorformation_show_all') }}">Formation d'opérateurs</a></h2>
