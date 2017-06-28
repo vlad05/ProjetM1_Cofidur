@@ -87,6 +87,18 @@ class OperatorFormationController extends Controller
         $em->remove($operatorformation);
         $em->flush();
 
+
+		/*$entity = $idOpForm->getEntity();
+		$em = $idOpForm->getEntityManager();
+		if (get_class($entity) == 'AppBundle:OperatorFormation') {
+			$operatorFormation = $em->getRepository('AppBundle:OperatorFormation');
+			$operatorsforms = $operatorFormation->findByNotice($entity);
+			foreach ($operatorsforms as $operatorsform) {
+				$em->remove($operatorsform);
+			}
+			$em->flush();
+		}*/
+
         return $this->redirectToRoute('AppBundle_operatorformation_show_all');
     }
 
@@ -118,5 +130,5 @@ class OperatorFormationController extends Controller
             'form' => $form->createView(),
         ));
     }
-    
+
 }

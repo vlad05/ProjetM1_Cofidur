@@ -23,7 +23,7 @@ class OperatorFormation
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", cascade={"remove"})
+     * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumn(name="operator_id", referencedColumnName="id")
      */
     private $operator;
@@ -69,7 +69,7 @@ class OperatorFormation
     private $commentary;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", cascade={"remove"})
+     * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumn(name="former_id", referencedColumnName="id")
      */
     private $former;
@@ -84,7 +84,7 @@ class OperatorFormation
     /**
      * @var ArrayCollection $operatorcategories
      *
-     * @ORM\OneToMany(targetEntity="OperatorCategory", mappedBy="operatorformation", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="OperatorCategory", mappedBy="operatorformation")
      */
     private $operatorcategories;
 
@@ -416,7 +416,7 @@ class OperatorFormation
     {
         return $this->validation == 1 or $this->validation >= 4;
     }
-    
+
     public function __toString() {
 		return $this->operator->getLastName()."".$this->operator->getFirstName()."".strval($this->id);
 	}
