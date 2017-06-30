@@ -9,6 +9,8 @@ use AppBundle\Form\Type\OperatorFormationType;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+//use Symfony\Component\Form\Extension\Core\Type\DateTime;
+use \DateTime;
 
 
 class OperatorFormationController extends Controller
@@ -87,18 +89,6 @@ class OperatorFormationController extends Controller
         $em->remove($operatorformation);
         $em->flush();
 
-
-		/*$entity = $idOpForm->getEntity();
-		$em = $idOpForm->getEntityManager();
-		if (get_class($entity) == 'AppBundle:OperatorFormation') {
-			$operatorFormation = $em->getRepository('AppBundle:OperatorFormation');
-			$operatorsforms = $operatorFormation->findByNotice($entity);
-			foreach ($operatorsforms as $operatorsform) {
-				$em->remove($operatorsform);
-			}
-			$em->flush();
-		}*/
-
         return $this->redirectToRoute('AppBundle_operatorformation_show_all');
     }
 
@@ -118,7 +108,16 @@ class OperatorFormationController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $operatorformation = $form->getData();
-
+			$validationChoice = $form->getData()->getValidation();
+			if($validationChoice == 4) { //4 = "Formé"
+				//Lancer l'action pour le décompte des jours
+				/*$today = new \DateTime('now');
+				$nbJours = $operatorformation->getFormation()->getValidityTime();
+				//$futureDate = $today + strtotime(strval($nbJours));
+				date_add($today, date_interval_create_from_date_string(strval($nbJours)." days"));
+				$operatorformation->setDateEnd($today);
+				*///$operatorformation->setDateEnd(new \DateTime('now') + strtotime("+".$operatorformation->getFormation()->getValidityTime()." days"));
+			}
             $em = $this->getDoctrine()->getManager();
             $em->persist($operatorformation);
             $em->flush();

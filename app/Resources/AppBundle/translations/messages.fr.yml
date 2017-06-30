@@ -67,7 +67,7 @@ formation:
     placesMaterialRessources: 'Lieu et moyens matériels'
     reference: 'Référence'
     sector: 'Secteur'
-    validityTime: 'Temps de validité'
+    validityTime: 'Temps de validité (en jours)'
     criticality: 'Criticité'
     save:
         submit: 'Enregistrer la formation'
