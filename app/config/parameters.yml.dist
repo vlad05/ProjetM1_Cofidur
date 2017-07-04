@@ -10,10 +10,10 @@ parameters:
     # You should uncomment this if you want use pdo_sqlite
     # database_path: "%kernel.root_dir%/data.db3"
 
-    mailer_transport:  gmail
-    mailer_host: smtp.gmail.com
-    mailer_user: ezlanguage.contact@gmail.com
-    mailer_password: ezlricher
+    mailer_transport:  smtp
+    mailer_host:       94.130.2.200
+    mailer_user:       lvlpgran
+    mailer_password:   pierregr
 
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisMyUnsecureToken

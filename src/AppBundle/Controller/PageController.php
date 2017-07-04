@@ -54,8 +54,8 @@ class PageController extends Controller
 
 		$message = \Swift_Message::newInstance();
 		$message->setSubject('Test mail');
-		$message->setFrom('piergranier77@gmail.com');
-		$message->setTo('piergranier77@gmail.com');
+		$message->setFrom('pierre.granier-richard@cofidur.com');
+		$message->setTo('pierre.granier-richard@cofidur.com');
 		//On passe la vue twig dans le body du message et hop ça fait des chocapics
 		/*$message->setBody($this->renderView('AppBundle:Page/OperatorFormation:operatorformation_mail.html.twig', array(
             'operatorsformations'      => $operatorsformations,
