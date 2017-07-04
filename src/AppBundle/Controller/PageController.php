@@ -52,19 +52,18 @@ class PageController extends Controller
 
         $operatorsformations = $em->findAll();
 
-		/*$message = \Swift_Message::newInstance();
+		$message = \Swift_Message::newInstance();
 		$message->setSubject('Test mail');
 		$message->setFrom('piergranier77@gmail.com');
 		$message->setTo('piergranier77@gmail.com');
 		//On passe la vue twig dans le body du message et hop ça fait des chocapics
-		$message->setBody($this->renderView('AppBundle:Page/OperatorFormation:operatorformation_mail.html.twig', array(
+		/*$message->setBody($this->renderView('AppBundle:Page/OperatorFormation:operatorformation_mail.html.twig', array(
             'operatorsformations'      => $operatorsformations,
-        ));
+        ));*/
+        $message->setBody('Bonjour Test');
 
         $this->get('mailer')->send($message);
-		*/
-        return $this->render('AppBundle:Page/OperatorFormation:operatorformation_mail.html.twig', array(
-            'operatorsformations'      => $operatorsformations,
-        ));
+
+        return $this->render('AppBundle:Page:index.html.twig');
 	}
 }
