@@ -69,7 +69,7 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     encryption: ssl
-    auth_mode: login
+    #auth_mode: login
     spool:     { type: memory }
 
 
