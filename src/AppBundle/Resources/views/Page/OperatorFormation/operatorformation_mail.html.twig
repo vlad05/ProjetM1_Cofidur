@@ -1,0 +1,47 @@
+
+{% block body %}
+	<h1>Liste des FO arrivant prochainement à terme</h1>
+
+    <table>
+	<tr>
+		<th> OPERATEUR </th>
+		<th> FORMATION </th>
+		<th> FORMATEUR </th>
+		<th> FIN </th>
+	</tr>
+{% set nbOper = 0 %}
+{% for operatorformation in operatorsformations %}
+	{% if operatorformation.formation.criticality == 4 %}
+	{% if "now"|date("Y-m-d") < operatorformation.dateEnd|date("Y-m-d") %}
+	<tr>
+		<td>
+			<a href="{{ path('AppBundle_operator_show', {'idOp': operatorformation.operator.id}) }}">
+				{{ operatorformation.operator.username }}
+			</a>
+		</td>
+		<td>
+			<a href="{{ path('AppBundle_formation_show', {'idForm': operatorformation.formation.id}) }}">
+				{{ operatorformation.formation.name }}
+			</a>
+		</td>
+		<td> {{ operatorformation.former.username}} </td>
+		<td> {{ operatorformation.dateEnd|date("d/m/Y") }} </td>
+		{# <td> {{ "now"|date("d/m/Y") }} </td> #}
+	</tr>
+	{% set nbOper = 1 %}
+	{% endif %}
+	{% endif %}
+{% endfor %}
+
+</table>
+
+{% if nbOper == 0 %}
+Aucun opérateur ne termine sa formation bientôt.
+{% endif %}
+
+
+{% endblock %}
+
+{% block sidebar_container %}
+{# Supprime la sidebar #}
+{% endblock %}

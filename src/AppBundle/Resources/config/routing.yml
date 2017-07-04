@@ -6,6 +6,11 @@ AppBundle_homepage:
     methods: [GET]
     defaults: { _controller: AppBundle:Page:index }
 
+AppBundle_testmail:
+    path: /mail
+    methods: [GET]
+    defaults: { _controller: AppBundle:Page:testMail }
+
 AppBundle_profile:
     path: /profile
     methods: [GET]

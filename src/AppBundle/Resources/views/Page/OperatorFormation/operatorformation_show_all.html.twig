@@ -32,8 +32,8 @@
 				{{ operatorformation.formation.name }}
 			</a>
 		</td>
-		<td> {{ operatorformation.dateBegin|date("m/d/Y")}} </td>
-		<td> {{ operatorformation.dateEnd|date("m/d/Y") }} </td>
+		<td> {{ operatorformation.dateBegin|date("d/m/Y")}} </td>
+		<td> {{ operatorformation.dateEnd|date("d/m/Y") }} </td>
 		{% if operatorformation.validation == 1 %}
 		<td><i>Invalidée</i>
 		{% elseif operatorformation.validation == 2 %}

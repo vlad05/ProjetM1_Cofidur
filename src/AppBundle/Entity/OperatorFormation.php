@@ -393,6 +393,8 @@ class OperatorFormation
             $remaining= $validityTime - $elapsed;
             /* TODO Use a DateTime type for formatting ? */
 //            $formatted_remaining= $remaining->format('%a');
+
+			//date('d-m-Y', $remaining);
             return $remaining;
         }
     }

@@ -111,12 +111,14 @@ class OperatorFormationController extends Controller
 			$validationChoice = $form->getData()->getValidation();
 			if($validationChoice == 4) { //4 = "Formé"
 				//Lancer l'action pour le décompte des jours
-				/*$today = new \DateTime('now');
+				$today = new \DateTime('now');
 				$nbJours = $operatorformation->getFormation()->getValidityTime();
 				//$futureDate = $today + strtotime(strval($nbJours));
-				date_add($today, date_interval_create_from_date_string(strval($nbJours)." days"));
+				date_add($today, date_interval_create_from_date_string(strval($nbJours).' days'));
+				//date_format($today, 'd-m-Y');
+				$today->format('d-m-Y');
 				$operatorformation->setDateEnd($today);
-				*///$operatorformation->setDateEnd(new \DateTime('now') + strtotime("+".$operatorformation->getFormation()->getValidityTime()." days"));
+				//$operatorformation->setDateEnd(new \DateTime('now') + strtotime("+".$operatorformation->getFormation()->getValidityTime()." days"));
 			}
             $em = $this->getDoctrine()->getManager();
             $em->persist($operatorformation);
