@@ -46,9 +46,9 @@ class PageController extends Controller
 		$em = $this->getDoctrine()->getRepository('AppBundle:OperatorFormation');
         $operatorsformations = $em->findAll();
 
-		$transporter = \Swift_SmtpTransport::newInstance('94.130.2.200', 25, 'ssl');
-		$transporter->setUsername('pierre.granier-richard@cofidur.com');
-		$transporter->setPassword('pierregr');
+		$transporter = \Swift_SmtpTransport::newInstance('smtp.gmail.com', 993, 'ssl');
+		$transporter->setUsername('ezlanguage.contact@gmail.com');
+		$transporter->setPassword('ezlricher');
 		/*
 		$message = \Swift_Message::newInstance($transporter);
 		$message->setSubject('Test mail');
@@ -59,8 +59,8 @@ class PageController extends Controller
 
 		$mailer = \Swift_Mailer::newInstance($transporter);
 		$message = Swift_Message::newInstance('Wonderful Subject');
-		$message->setFrom(array('pierre.granier-richard@cofidur.com' => 'Test'));
-		$message->setTo(array('pierre.granier-richard@cofidur.com'=> 'Pierre'));
+		$message->setFrom(array('ezlanguage.contact@gmail.com' => 'Test'));
+		$message->setTo(array('piergranier77@gmail.com'=> 'Pierre'));
 		$message->setBody('Test Message Body');
 
 		//$result = $mailer->send($message);

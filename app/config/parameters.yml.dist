@@ -11,9 +11,9 @@ parameters:
     # database_path: "%kernel.root_dir%/data.db3"
 
     mailer_transport:  smtp
-    mailer_host:       94.130.2.200
-    mailer_user:       pierre.granier-richard@cofidur.com
-    mailer_password:   pierregr
+    mailer_host:       smtp.gmail.com
+    mailer_user:       ezlanguage.contact@gmail.com
+    mailer_password:   ezlricher
 
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisMyUnsecureToken
