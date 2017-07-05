@@ -46,23 +46,23 @@ class PageController extends Controller
 		$em = $this->getDoctrine()->getRepository('AppBundle:OperatorFormation');
         $operatorsformations = $em->findAll();
 
-		$transporter = \Swift_SmtpTransport::newInstance('smtp.gmail.com', 993, 'ssl');
+		$transporter = \Swift_SmtpTransport::newInstance('smtp.gmail.com', 465, 'ssl');
 		$transporter->setUsername('ezlanguage.contact@gmail.com');
 		$transporter->setPassword('ezlricher');
-		/*
+
 		$message = \Swift_Message::newInstance($transporter);
 		$message->setSubject('Test mail');
 		$message->setFrom('ezlanguage.contact@gmail.com');
 		$message->setTo('piergranier77@gmail.com');
         $message->setBody('Bonjour Test');
-		*/
 
+		/*
 		$mailer = \Swift_Mailer::newInstance($transporter);
 		$message = Swift_Message::newInstance('Wonderful Subject');
 		$message->setFrom(array('ezlanguage.contact@gmail.com' => 'Test'));
 		$message->setTo(array('piergranier77@gmail.com'=> 'Pierre'));
 		$message->setBody('Test Message Body');
-
+		*/
 		//$result = $mailer->send($message);
 
 		//On passe la vue twig dans le body du message et hop ça fait des chocapics
