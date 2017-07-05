@@ -43,16 +43,16 @@ class PageController extends Controller
 	public function testMailAction()
 	{
 		//à supprimer
-		/*$transport = (new Swift_SmtpTransport('94.130.2.200', 25));
-		$transport->setUsername('lvlpgran');
-		$transport->setPassword('pierregr');
+		$transporter = Swift_SmtpTransport::newInstance('smtp.gmail.com', 465);
+		$transporter->setUsername('ezlanguage.contact@gmail.com');
+		$transporter->setPassword('ezlricher');
 
 		//$mailer = new \Swift_Mailer($transport);*/
 		$em = $this->getDoctrine()->getRepository('AppBundle:OperatorFormation');
 
         $operatorsformations = $em->findAll();
 
-		$message = \Swift_Message::newInstance();
+		$message = \Swift_Message::newInstance($transporter);
 		$message->setSubject('Test mail');
 		$message->setFrom('ezlanguage.contact@gmail.com');
 		$message->setTo('piergranier77@gmail.com');
