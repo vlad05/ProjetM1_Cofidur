@@ -43,7 +43,7 @@ class PageController extends Controller
 	public function testMailAction()
 	{
 		//à supprimer
-		$transporter = Swift_SmtpTransport::newInstance('smtp.gmail.com', 465);
+		$transporter = Swift_SmtpTransport::newInstance('smtp.gmail.com', 25);
 		$transporter->setUsername('ezlanguage.contact@gmail.com');
 		$transporter->setPassword('ezlricher');
 
