@@ -46,7 +46,7 @@ class PageController extends Controller
 		$em = $this->getDoctrine()->getRepository('AppBundle:OperatorFormation');
         $operatorsformations = $em->findAll();
 
-		$transporter = Swift_SmtpTransport::newInstance('smtp.gmail.com', 465, 'ssl');
+		$transporter = \Swift_SmtpTransport::newInstance('smtp.gmail.com', 465, 'ssl');
 		$transporter->setUsername('ezlanguage.contact@gmail.com');
 		$transporter->setPassword('ezlricher');
 		/*
@@ -63,14 +63,14 @@ class PageController extends Controller
 		$message->setTo(array('piergranier77@gmail.com'=> 'Pierre'));
 		$message->setBody('Test Message Body');
 
-		$result = $mailer->send($message);
+		//$result = $mailer->send($message);
 
 		//On passe la vue twig dans le body du message et hop ça fait des chocapics
 		/*$message->setBody($this->renderView('AppBundle:Page/OperatorFormation:operatorformation_mail.html.twig', array(
             'operatorsformations'      => $operatorsformations,
         ));*/
 
-        //$this->get('mailer')->send($message);
+        $this->get('mailer')->send($message);
 
         return $this->render('AppBundle:Page:index.html.twig');
 	}
