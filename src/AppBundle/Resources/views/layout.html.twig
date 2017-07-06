@@ -18,5 +18,7 @@
     {#}{% if is_granted('ROLE_ADMIN') %}
     <h2><a href="{{ path('AppBundle_admin') }}">Administration</a></h2>
     {% endif %}#}
+    {% if is_granted('ROLE_SUPER_ADMIN') %}
     <h2><a href="{{ path('AppBundle_testmail') }}">Test Mail</a></h2>
+    {% endif %}
 {% endblock sidebar_nav %}

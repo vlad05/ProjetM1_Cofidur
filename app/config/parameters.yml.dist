@@ -10,7 +10,7 @@ parameters:
     # You should uncomment this if you want use pdo_sqlite
     # database_path: "%kernel.root_dir%/data.db3"
 
-    mailer_transport:  sendmail
+    mailer_transport:  smtp
     mailer_host:       smtp.gmail.com
     mailer_user:       ezlanguage.contact@gmail.com
     mailer_password:   ezlricher
