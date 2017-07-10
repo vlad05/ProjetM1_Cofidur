@@ -66,6 +66,7 @@
 		<th> Sup 2 </th>
 	</tr>
 {% for operator in operators %}
+	{% if operator.id is defined %}
 	<tr>
 		<td> {{ operator.registrationNumber }} </td>
         <td>
@@ -96,6 +97,7 @@
 		</td>
 		{% endif %}
 	</tr>
+	{% endif %}
 {% endfor %}
 </table>
 {% endif %}

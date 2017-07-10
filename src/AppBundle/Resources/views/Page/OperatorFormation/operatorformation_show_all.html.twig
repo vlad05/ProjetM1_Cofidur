@@ -21,6 +21,7 @@
 		<th> FORMATEUR </th>
 	</tr>
 {% for operatorformation in operatorsformations %}
+	{% if operatorformation.operator.id is defined and operatorformation.formation.id is defined %}
 	<tr>
 		<td>
 			<a href="{{ path('AppBundle_operator_show', {'idOp': operatorformation.operator.id}) }}">
@@ -76,6 +77,7 @@
 		{% endif %}
 		{% endif %}
 	</tr>
+	{% endif %}
 {% endfor %}
 </table>
 {% endblock %}

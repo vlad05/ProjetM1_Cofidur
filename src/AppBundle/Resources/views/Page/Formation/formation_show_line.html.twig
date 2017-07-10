@@ -1,3 +1,4 @@
+{% if formationsNbFormed[formation.id-1] is defined %}
 <tr>
     <td title="{{ formation.name }}"> {{ formation.name| slice(0,20)  }}... </td>
     <td> {{ formation.sector }} </td>
@@ -34,3 +35,4 @@
     {% endif %}
 
 </tr>
+{% endif %}

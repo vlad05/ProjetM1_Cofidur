@@ -24,13 +24,13 @@ class OperatorFormation
 
     /**
      * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumn(name="operator_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="operator_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $operator;
 
     /**
      * @ORM\ManyToOne(targetEntity="Formation")
-     * @ORM\JoinColumn(name="formation_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="formation_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $formation;
 

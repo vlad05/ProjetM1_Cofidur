@@ -113,12 +113,16 @@ class SkillMatrixController extends Controller
             //traitement
             $nbOperatorFormations = count($operatorsformations);
             for ($i= 0; $i < $nbOperatorFormations; ++$i) {
-                $operatorId= $operatorsformations[$i]->getOperator()->getId();
-                $formationId= $operatorsformations[$i]->getFormation()->getId();
-                $validation= $operatorsformations[$i]->getValidation();
-                $operatorsformationsId= $operatorsformations[$i]->getId();
+				if(isset($operatorsformations[$i])) {
+					if(!is_null($operatorsformations[$i]->getFormation()) && !is_null($operatorsformations[$i]->getOperator())) {
+						$operatorId= $operatorsformations[$i]->getOperator()->getId();
+						$formationId= $operatorsformations[$i]->getFormation()->getId();
+						$validation= $operatorsformations[$i]->getValidation();
+						$operatorsformationsId= $operatorsformations[$i]->getId();
 
-                $allConnexions[$i]= [$operatorId, $formationId, $validation, $operatorsformationsId];
+						$allConnexions[$i]= [$operatorId, $formationId, $validation, $operatorsformationsId];
+					}
+				}
             }
         }else{
             //traitement général
@@ -129,12 +133,16 @@ class SkillMatrixController extends Controller
 
             $nbOperatorFormations = count($operatorsformations);
             for ($i= 0; $i < $nbOperatorFormations; ++$i) {
-                $operatorId= $operatorsformations[$i]->getOperator()->getId();
-                $formationId= $operatorsformations[$i]->getFormation()->getId();
-                $validation= $operatorsformations[$i]->getValidation();
-                $operatorsformationsId= $operatorsformations[$i]->getId();
+				if(isset($operatorsformations[$i])) {
+					if(!is_null($operatorsformations[$i]->getFormation()) && !is_null($operatorsformations[$i]->getOperator())) {
+						$operatorId= $operatorsformations[$i]->getOperator()->getId();
+						$formationId= $operatorsformations[$i]->getFormation()->getId();
+						$validation= $operatorsformations[$i]->getValidation();
+						$operatorsformationsId= $operatorsformations[$i]->getId();
 
-                $allConnexions[$i]= [$operatorId, $formationId, $validation, $operatorsformationsId];
+						$allConnexions[$i]= [$operatorId, $formationId, $validation, $operatorsformationsId];
+					}
+				}
             }
         }
 
