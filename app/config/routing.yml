@@ -23,11 +23,3 @@ fos_user_resetting:
 fos_user_change_password:
     resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
     prefix: /profile
-
-_wdt:
-    resource: "@WebProfilerBundle/Resources/config/routing/wdt.xml"
-    prefix:   /_wdt
-
-_profiler:
-    resource: "@WebProfilerBundle/Resources/config/routing/profiler.xml"
-    prefix:   /_profiler
