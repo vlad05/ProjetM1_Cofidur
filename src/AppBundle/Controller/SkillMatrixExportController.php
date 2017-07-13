@@ -16,7 +16,7 @@ class SkillMatrixExportController extends Controller
 
 	public function skillMatrixExpAction(/*HistorisationSkillMatrixService $service*/) {
 		//$response = $service->skillMatrix();
-		return $this->container->get('app_cofidur.HistorisationSkillMatrix');
+		return $this->container->get('app_cofidur.historisationskillmatrix');
 	}
 
     public function skillMatrixExportAction(Request $request)

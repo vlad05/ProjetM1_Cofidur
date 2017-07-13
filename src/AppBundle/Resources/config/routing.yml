@@ -45,7 +45,7 @@ AppBundle_skillMatrix:
 AppBundle_skillMatrix_export:
     path: /skillMatrixExport
     methods: [POST, GET]
-    defaults: { _controller: AppBundle:SkillMatrixExport:skillMatrixExp }
+    defaults: { _controller: AppBundle:SkillMatrixExport:skillMatrixExport }
 
 ### Pages d'authentifiation ###
 AppBundle_login:
