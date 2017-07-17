@@ -11,7 +11,8 @@ class SkillMatrixController extends Controller
 
     public function skillMatrixAction(Request $request)
     {
-        /* $matrice = $this->container->get('app_cofidur.skillmatrix');
+        /* Test avec la classe en "service"
+         *  $matrice = $this->container->get('app_cofidur.skillmatrix');
 
         return $matrice->skillMatrix();
         */
