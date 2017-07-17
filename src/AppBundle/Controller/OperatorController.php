@@ -261,7 +261,7 @@ class OperatorController extends Controller
 			$row = 1;
 			$em = $this->getDoctrine()->getManager();
 
-			if (($handle = fopen("/var/salariesTXT_2.prn", "r")) !== FALSE) {
+			if (($handle = fopen("/var/salariesTXT_3.prn", "r")) !== FALSE) {
 				while (($data = fgetcsv($handle, 1000, ";")) !== FALSE) {
 					$num = count($data);
 					$row++;
