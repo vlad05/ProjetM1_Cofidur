@@ -179,7 +179,7 @@ class OperatorController extends Controller
             $operator = $form->getData();
             $operator->setUsername($operator->getRegistrationNumber());
             //$random = random_bytes(10);		//Premier set du MDP à changer ici
-            $operator->setPlainPassword($operator->getRegistrationNumber());	//Le pwd est le prénom
+            $operator->setPlainPassword($operator->getRegistrationNumber());	//Le pwd est matricule
 			$operator->addRole("ROLE_USER");
             $em = $this->getDoctrine()->getManager();
 
@@ -223,6 +223,8 @@ class OperatorController extends Controller
 		$fichier = new ImportSalaries();
 
 	//Code pour faire un upload de fichier : unecessary (fin du code en bas de fonction)
+
+
 		//$form = $this->createForm(ImportSalariesType::class, $fichier);
 
         /*$form = $this->createFormBuilder($fichier)
@@ -259,7 +261,7 @@ class OperatorController extends Controller
 			$row = 1;
 			$em = $this->getDoctrine()->getManager();
 
-			if (($handle = fopen("/var/www/html/cofidur_projet/salariesTXT.prn", "r")) !== FALSE) {
+			if (($handle = fopen("/var/salariesTXT.prn", "r")) !== FALSE) {
 				while (($data = fgetcsv($handle, 1000, ";")) !== FALSE) {
 					$num = count($data);
 					$row++;
@@ -273,36 +275,40 @@ class OperatorController extends Controller
 						$mots = explode(' ', $mots);
 
 						//Boucle d'affichage pour voir si la chaîne s'est bien divisée en tableau
-						for ($x=0; $x < count($mots); $x++) {
+						/*for ($x=0; $x < count($mots); $x++) {
 							echo $x . " - " . $mots[$x] . "<br />\n";
-						}
+						}*/
 
 						$nomNPlus1 = $em->getRepository('AppBundle:User')
 							->findOneBy(array('lastName' => $mots[6]));
 						$nomNPlus2 = $em->getRepository('AppBundle:User')
-							->findOneBy(array('lastName' => $mots[7]));
+							->findOneBy(array('lastName' => "root"));
 
 						//var_dump($nomNPlus1);
 
 						//test
 						if(!$nomNPlus1)
-							echo "Nop : ".$mots[6]."<br />";
+							echo "Nop no N+1 : ".$mots[6]."<br />";
 
 						//parser le string en date
-						$dateEntree = date_parse($mots[5]);
+						//$dateEntree = date_parse($mots[5]);
 						//print_r($dateEntree);
 
-						$mots5 = str_replace('/', '-', $mots[5]);
-						$date = DateTime::createFromFormat('j-m-Y', $mots5);
+						//$mots5 = str_replace('/', '-', $mots[5]);
+						//$date = DateTime::createFromFormat('j/m/Y', $mots[5]);
 						//var_dump($date);
 
-						echo "<br /> coucou - ". strval($mots[0]) . "<br />";
+						//echo "<br /> coucou - ". strval($mots[0]) . "<br />";
 
-						switch($mots[4]) {
+						switch($mots[4]) {	//J'ai peut-être inversé les valeurs correspondantes
 							case "CDI":
 								$mots[4] = 1;
 							case "CDD":
 								$mots[4] = 2;
+							case "int":
+								$mots[4] = 3;
+							default:
+								$mots[4] = 1;
 						}
 
 						$operator->setRegistrationNumber(strval($mots[0]))
@@ -310,12 +316,12 @@ class OperatorController extends Controller
 							->setFirstName($mots[2])
 							->setSite($mots[3])
 							->setStatus($mots[4])
-							->setDateEntree($date)
+							//->setDateEntree($date)
 							->setSuperiorLvl1($nomNPlus1)
 							->setSuperiorLvl2($nomNPlus2);
-						$operator->setUsername(strtolower(substr($operator->getFirstName(), 0, 3)) . strtolower($operator->getLastName()));
-						$random = random_bytes(10);
-						$operator->setPassword(base64_encode($random));
+						$operator->setUsername($operator->getRegistrationNumber());
+
+						$operator->setPlainPassword($operator->getRegistrationNumber());
 
 
 						$em = $this->getDoctrine()->getManager();
@@ -323,7 +329,7 @@ class OperatorController extends Controller
 
 				    }
 				}
-				//en dehors de la boucle car coûteux
+				//on flsuh en dehors de la boucle car coûteux
 				$em->flush();
 
 
