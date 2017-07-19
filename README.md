@@ -7,8 +7,8 @@ Projet de Gestion des FFO pour l'entreprise Cofidur-EMS
 Installer composer (voir la  [documentation officielle](https://getcomposer.org/download/))
 
 ```sh
-$ git clone https://github.com/ezlanguage/website.git
-$ cd website
+$ git clone https://github.com/PierreGranier/ProjetM1_Cofidur.git
+$ cd ProjetM1_Cofidur
 $ composer install # Installation des dépendances
 ```
 
