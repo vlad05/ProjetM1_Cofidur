@@ -56,18 +56,9 @@ class OperatorController extends Controller
 
     public function showAllAction(Request $request)
     {	//Récupère tous les opérateurs et render la vue correspondante à la liste
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getRepository('AppBundle:User');
 
-        $operators = $em->getRepository('AppBundle:User')->findAll();
-
-		foreach($operators as $operator) {
-			if($operator->getStatus() == 1) {
-				$operator->setStatus(3);
-				$em->persist($operator);
-			}
-		}
-		$em->flush();
-
+        $operators = $em->findAll();
 
         return $this->render('AppBundle:Page/Operator:operator_show_all.html.twig', array(
             'operators'      => $operators,
