@@ -27,7 +27,7 @@ class OperatorController extends Controller
 	}*/
 
     public function showAction($idOp)
-    {
+    { //Show un opérateur ainsi que ses formations en cours et les formations qu'il supervise
         $em = $this->getDoctrine()->getManager();
 
         $operator = $em->getRepository('AppBundle:User')->find($idOp);
@@ -55,7 +55,7 @@ class OperatorController extends Controller
     }
 
     public function showAllAction(Request $request)
-    {
+    {	//Récupère tous les opérateurs et render la vue correspondante à la liste
         $em = $this->getDoctrine()->getRepository('AppBundle:User');
 
         $operators = $em->findAll();
@@ -67,7 +67,7 @@ class OperatorController extends Controller
     }
 
     public function deleteAction($idOp)
-    {
+    { //Delete un opérateur
         $em = $this->getDoctrine()->getManager();
 
         $operator = $em->getRepository('AppBundle:User')->find($idOp);
@@ -88,7 +88,9 @@ class OperatorController extends Controller
 
         $operator = $em->getRepository('AppBundle:User')->find($idOp);
 
-//        $operator->addRole("ROLE_ADMIN");
+		/*Un peu barbare comme méthode j'imagine, mais j'ai pas trouvé comment faire autrement.
+		 *On vérifie le rôle actuel (pour faire tous les cas) et on le remove pour mettre le nouveau
+		*/
 
         if($operator->hasRole("ROLE_QUATHODE")) {
 			$operator->removeRole("ROLE_QUATHODE");
@@ -113,11 +115,15 @@ class OperatorController extends Controller
         return $this->redirectToRoute('AppBundle_operator_show', array('idOp' => $operator->getId()));
     }
 
-    public function unsetAdminAction($idOp) {
-
+    public function unsetAdminAction($idOp)
+    {
         $em = $this->getDoctrine()->getManager();
 
         $operator = $em->getRepository('AppBundle:User')->find($idOp);
+
+		/*Un peu barbare comme méthode j'imagine, mais j'ai pas trouvé comment faire autrement.
+		 *On vérifie le rôle actuel (pour faire tous les cas) et on le supprime pour mettre le nouveau
+		*/
 
 		if($operator->hasRole("ROLE_QUATHODE")) {
 			$operator->removeRole("ROLE_QUATHODE");
