@@ -60,11 +60,15 @@ class OperatorController extends Controller
 
         $operators = $em->findAll();
 
-		$nbOp = count($operators);
 		foreach($operators as $operator) {
-			if($operator->getStatus() == 1)
+			if($operator->getStatus() == 1) {
 				$operator->setStatus(3);
+				$em->persist($operator);
+			}
 		}
+		$em->flush();
+
+
         return $this->render('AppBundle:Page/Operator:operator_show_all.html.twig', array(
             'operators'      => $operators,
         ));
