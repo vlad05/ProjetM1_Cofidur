@@ -56,9 +56,9 @@ class OperatorController extends Controller
 
     public function showAllAction(Request $request)
     {	//Récupère tous les opérateurs et render la vue correspondante à la liste
-        $em = $this->getDoctrine()->getRepository('AppBundle:User');
+        $em = $this->getDoctrine()->getManager();
 
-        $operators = $em->findAll();
+        $operators = $em->getRepository('AppBundle:User')->findAll();
 
 		foreach($operators as $operator) {
 			if($operator->getStatus() == 1) {
