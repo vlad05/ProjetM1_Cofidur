@@ -147,6 +147,17 @@ class SkillMatrixController extends Controller
             }
         }
 
+		/* Ce petit morceau de code avant le return
+		 * passe les formations de niveau 4 ayant une date de validité dépassée
+		 * au statut "Rétrogradé"
+		 */
+		$operatorformationRetrogradation = $em->getRepository('AppBundle:OperatorFormation')->findAll();
+		foreach($operatorformationRetrogradation as $operatorformationRetro) {
+			if($operatorformationRetro->isInvalidated()) {
+				$operatorformationRetro->setValidation(6);
+			}
+		}
+
         return $this->render('AppBundle:Page:skillMatrix.html.twig', array(
             'form'                         => $form->createView(),
             'formations'                   => $formations,
