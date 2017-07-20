@@ -71,7 +71,7 @@
         {% for operator in operators %}
             <tr>
                 <td>
-                    <a href="{{ path('AppBundle_operator_show', {'idOp': operator.id}) }}">{{ operator.id }}</a>
+                    <a href="{{ path('AppBundle_operator_show', {'idOp': operator.id}) }}">{{ operator.registrationNumber }}</a>
                 </td>
                 <td>
                     <a href="{{ path('AppBundle_operator_show', {'idOp': operator.id}) }}">{{ operator.lastname }}</a>
