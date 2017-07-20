@@ -21,7 +21,7 @@ class SkillMatrixExportController extends Controller
 
     public function skillMatrixExportAction(Request $request)
     {
-		//"Import" depuis skillMatrixController.php
+		//"Import" du code depuis skillMatrixController.php : c'est du copié-collé mais ça serait mieux de faire un service
 		/*******************/
 		$em = $this->getDoctrine()->getManager();
 
@@ -49,7 +49,7 @@ class SkillMatrixExportController extends Controller
 
 		/**************************************************************************/
 		/*
-		 * Copié-collé de code de SkillMatrixController (pasbien)
+		 * Copié-collé de code de SkillMatrixController (pasbien : ça serait mieux de faire un service)
 		 */
 		$form = $this->createForm(SkillMatrixType::class);
 
@@ -224,17 +224,16 @@ class SkillMatrixExportController extends Controller
 
 				//Boucle sur les colonnes
 				for($j=0; $j<$nbFormations; ++$j) {
-					//Si la formation de l'opérateur est égale au nom de la form (en colonne) de la matrice, alors on remplit la valeur
+					//Si la formation de l'opérateur est égale au nom de la formation (en colonne) de la matrice, alors on remplit la valeur
 					if($operatorsformations[$i]->getFormation()->getName() == $phpExcelObject->getActiveSheet()->getCellByColumnAndRow($j+6, 1)->getValue()) {
 
 						//Inscrit la valeur de la validation dans la case correspondante
 						$phpExcelObject->setActiveSheetIndex(0)
 							->setCellValueByColumnAndRow($j+6, $operatorId+1, $operatorsformations[$i]->getValidation());
 
-						//switch de coloriage
+						//switch de coloriage de la case actuelle
 						switch($operatorsformations[$i]->getValidation()) {
 							case 1:	//Formé non habilité (orange)
-							//$i.$phpExcelObject->getActiveSheet()->getCellByColumnAndRow($j+6, $operatorId+1)
 								$phpExcelObject->getActiveSheet()
 									->getStyle($currCol.strval($operatorId+1))
 									->applyFromArray(
@@ -294,7 +293,6 @@ class SkillMatrixExportController extends Controller
 										)
 									);
 								break;
-								//
 							case 6:	//rétrogradé (gris)
 								$phpExcelObject->getActiveSheet()
 									->getStyle($currCol.strval($operatorId+1))
