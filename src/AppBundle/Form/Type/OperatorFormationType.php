@@ -63,7 +63,7 @@ class OperatorFormationType extends AbstractType
             ->add('former', EntityType::class,
                 array(
                    'class'  => 'AppBundle:User',
-                   'choice_label' => 'firstName',
+                   'choice_label' => 'lastNamefirstName',
                    'label_format' => 'operatorFormation.formerName',
                 )
             )
