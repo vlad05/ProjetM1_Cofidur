@@ -1,5 +1,5 @@
 set :application, 'cofidur_projet'
-set :repo_url, 'https://github.com/PierreGranier/ProjetM1_Cofidur.git'
+set :repo_url, 'https://github.com/vlad05/ProjetM1_Cofidur.git'
 
 set :ssh_user, 'root'
 server '10.235.36.193', user: fetch(:ssh_user), roles: %w{web app db}
