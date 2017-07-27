@@ -42,6 +42,18 @@
 			<th class="entete_category">Criticité</th><td>{{ formation.criticality }} </td>
 		</tr>
 		<tr>
+			<th class="entete_category">Tuteur</th>
+				<td>
+					{% if formation.tuteur is empty %}
+						Il n'y a aucun tuteur pour cette formation
+					{% else %}
+						{% for tuteur in formation.tuteur %}
+							{{ tuteur.lastNameFirstName }}  </br>
+						{% endfor %}
+					{% endif %}
+				</td>
+		</tr>
+		<tr>
 			<th class="entete_category">Habilitées / habilitées à former</th><td> {{ nbFormed }} ({{ nbFormedTot }}) / {{ nbFormer }} ({{ nbFormerTot }}) </td>
 		</tr>
 	</table>
@@ -146,6 +158,10 @@
 			<ul>
 				<li>
 					<input type="button" value="Editer" onclick="{window.location.href='{{ path('AppBundle_formation_edit', {'idForm': formation.id}) }}'}">
+				</li>
+				<li>
+					<input type="button" value="Gérer les tuteurs" onclick="{window.location.href='{{ path('AppBundle_formation_add_tuteur', {'idForm': formation.id}) }}'}">
+					{# <a href="{{ path('AppBundle_formation_add_tuteur', {'idFo': formation.id}) }}"> Gérer les tuteurs de cette formation</a> #}
 				</li>
 				<li>
 					<input type="button" value="Supprimer"

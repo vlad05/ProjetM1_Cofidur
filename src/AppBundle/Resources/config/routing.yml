@@ -136,6 +136,14 @@ AppBundle_formation_add:
     methods: [POST,GET]
     defaults: { _controller: AppBundle:Formation:add}
 
+AppBundle_formation_add_tuteur:
+    path: /formation/add/tuteur/{idForm}
+    methods: [POST,GET]
+    defaults: { _controller: AppBundle:Formation:addTuteur}
+    requirements:
+        methods: GET
+        id: \d+
+
 AppBundle_formation_edit:
     path:  /formation/edit/{idForm}
     methods: [POST,GET]

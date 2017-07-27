@@ -2,9 +2,11 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\User;
 use AppBundle\Entity\Formation;
 use AppBundle\Form\Type\FormationType;
-
+use AppBundle\Form\Type\FormationTuteurType;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -118,6 +120,10 @@ class FormationController extends Controller
 
         $op_fo = $em->getRepository('AppBundle:OperatorFormation')->findBy(['formation'=>$formation]);
 
+		//On récupère le tuteur
+		$tuteurs = $formation->getTuteur();
+
+
         $tab=[];
         foreach($op_fo as $opfo){
             if($opfo->getValidation() >= 4){
@@ -148,7 +154,7 @@ class FormationController extends Controller
                 if(isset($finaltab[$ma_date])){
                     $finaltab[$ma_date] -= 1;
                 }else{
-                    $finaltab[$ma_date] = 0;                    
+                    $finaltab[$ma_date] = 0;
                 }
             }
         }else{
@@ -194,12 +200,18 @@ class FormationController extends Controller
         $nbFormerTot = $this->nbOperatorsFormations($em, $formation, 5);
         $nbFormedAndFormerTot = $nbFormerTot + $this->nbOperatorsFormations($em, $formation, 4);
 
+
+		/* Récupération des tuteurs de la formation
+		*/
+		//$tuteurs = $this
+
         return $this->render('AppBundle:Page/Formation:formation_show.html.twig', array(
             'formation'     => $formation,
             'nbFormed'      => $nbFormedAndFormer,
             'nbFormer'      => $nbFormer,
             'nbFormedTot' => $nbFormedAndFormerTot,
             'nbFormerTot' => $nbFormerTot,
+            'tuteurs' => $tuteurs,
         ));
     }
 
@@ -234,4 +246,43 @@ class FormationController extends Controller
 //            'formationsNbFormerTot' => $formationsNbFormerTot,
         ));
     }
+
+	//Méthode servant à ajouter un tuteur à une formation (à l'aide d'un formulaire)
+	//La méthode setTuteur(User $user) de l'entité Formation est utilisée
+    public function addTuteurAction(Request $request, $idForm)
+    {
+		$em = $this->getDoctrine()->getManager();
+        $formation = $em->getRepository('AppBundle:Formation')->find($idForm);
+
+        if (!$formation) {
+            throw $this->createNotFoundException('Pas d\'objet');
+        }
+
+		//La ligne ci-dessous sert à récupérer la liste des tuteurs de la formation (pour l'envoyer à la vue)
+		$tuteurs = $formation->getTuteur();
+
+        $form = $this->createForm(FormationTuteurType::class, $formation);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $formation = $form->getData();
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($formation);
+            $em->flush();
+
+			$nextAction= $form->get('saveAndAdd')->isClicked()
+            ? 'AppBundle_formation_add_tuteur'
+            : 'AppBundle_formation_show';
+
+            return $this->redirectToRoute($nextAction, array('idForm' => $idForm));
+        }
+
+        return $this->render('AppBundle:Page/Formation:formation_add_tuteur.html.twig', array(
+            'form' => $form->createView(),
+            'formation'     => $formation,
+            'tuteurs' => $tuteurs,
+        ));
+	}
 }

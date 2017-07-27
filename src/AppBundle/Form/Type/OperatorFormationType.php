@@ -21,7 +21,7 @@ class OperatorFormationType extends AbstractType
         $builder
             ->add('operator', EntityType::class,
                 array(
-                   'class'  => 'AppBundle:User', 'choice_label' => 'firstName',
+                   'class'  => 'AppBundle:User', 'choice_label' => 'lastNameFirstName',
                    'label_format' => 'operatorFormation.operatorName',
                 )
             )
@@ -59,15 +59,21 @@ class OperatorFormationType extends AbstractType
                     'label_format' => 'operatorFormation.validationStatus',
                 )
             )
-            ->add('commentary', TextType::class, ['label' => 'operatorFormation.commentary', 'required' => false])
-            ->add('former', EntityType::class,
-                array(
-                   'class'  => 'AppBundle:User',
-                   'choice_label' => 'lastNamefirstName',
-                   'label_format' => 'operatorFormation.formerName',
-                )
-            )
-            ->add('save', SubmitType::class, ['label' => 'operatorFormation.save.submit']);
+            ->add('commentary', TextType::class, ['label' => 'operatorFormation.commentary', 'required' => false]);
+
+
+			$builder->add('former', EntityType::class,
+				array(
+				   'class'  => 'AppBundle:User',
+				   'choice_label' => 'lastNamefirstName',
+				   'label_format' => 'operatorFormation.formerName',
+				   //'choices' => 'TuteursOnly',
+				)
+			);
+				//}
+			//}
+
+            $builder->add('save', SubmitType::class, ['label' => 'operatorFormation.save.submit']);
     }
 
     public function configureOptions(OptionsResolver $resolver)

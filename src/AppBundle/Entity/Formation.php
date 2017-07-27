@@ -93,6 +93,13 @@ class Formation
      */
     private $validityTime;
 
+    /**
+     * @var ArrayCollection $tuteurs
+     *
+     * @ORM\ManyToMany(targetEntity="User", inversedBy="formations")
+     * @ORM\JoinTable(name="tuteursFormation")
+     */
+    private $tuteurs;
 
     /**
      * Constructor
@@ -100,6 +107,7 @@ class Formation
     public function __construct()
     {
         $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->tuteurs = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -360,4 +368,52 @@ class Formation
     {
         return $this->categories;
     }
+
+    /**
+     * Add tuteurs
+     *
+     * @param \AppBundle\Entity\Formation $formation
+     *
+     * @return Formation
+     */
+	 public function addTuteurs(\AppBundle\Entity\User $user)
+	 {
+		$this->tuteurs[] = $user;
+
+		return $this;
+	 }
+
+    /*
+     *
+     * set tuteurs
+     *
+     * @return \AppBundle\Entity\Formation $formation
+     */
+	 public function setTuteur(\AppBundle\Entity\User $user)
+	 {
+		$this->tuteurs[] = $user;
+
+		return $this;
+	 }
+
+	 /**
+     * Remove tuteur
+     *
+     * @param \AppBundle\Entity\User $user
+     */
+	 public function removeTuteur(\AppBundle\Entity\User $user)
+	 {
+		$this->tuteurs->removeElement($user);
+	 }
+
+    /**
+     * Get tuteur
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+	 public function getTuteur()
+	 {
+		return $this->tuteurs;
+	 }
+
 }

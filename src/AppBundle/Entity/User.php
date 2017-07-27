@@ -26,7 +26,7 @@ class User extends BaseUser
 		$this->setLastName("");
 		$this->setStatus(1);
 		$this->dateEntree = new \DateTime();
-
+		$this->formations = new \Doctrine\Common\Collections\ArrayCollection();
 	}
 
 
@@ -115,6 +115,14 @@ class User extends BaseUser
      * @ORM\Column(name="date_entree", type="date", nullable=true)
      */
     private $dateEntree;
+
+     /**
+     * @var ArrayCollection $formation
+     *
+     * @ORM\ManyToMany(targetEntity="Formation", mappedBy="tuteurs")
+     * @ORM\JoinTable(name="tuteursFormation")
+     */
+    private $formations;
 
     /**
      * Get id
@@ -352,5 +360,50 @@ class User extends BaseUser
         return $this->dateEntree;
     }
 
+    /**
+     * Add formation
+     *
+     * @param \AppBundle\Entity\Formation $formation
+     *
+     * @return User
+     */
+	 public function addFormation(\AppBundle\Entity\Formation $formation)
+	 {
+		$this->formations[] = $formation;
+
+		return $this;
+	 }
+
+    /*  *
+     * set formations
+     *
+     * @return \AppBundle\Entity\Formation $formation
+     */
+	 /*public function setFormation(ArrayCollection $formations)
+	 {
+		$this->formations = $formations;
+
+		return $this;
+	 }*/
+
+	 /**
+     * remove formation
+     *
+     * @param \AppBundle\Entity\Formation $formation
+     */
+	 public function removeFormation(\AppBundle\Entity\Formation $formation)
+	 {
+		$this->formations->removeElement($formation);
+	 }
+
+    /**
+     * Get formation
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+	 public function getTuteur()
+	 {
+		return $this->formations;
+	 }
 
 }

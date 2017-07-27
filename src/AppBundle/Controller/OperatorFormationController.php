@@ -113,11 +113,13 @@ class OperatorFormationController extends Controller
 				//Lancer l'action pour le décompte des jours
 				$today = new \DateTime('now');
 				$nbJours = $operatorformation->getFormation()->getValidityTime();
-				//$futureDate = $today + strtotime(strval($nbJours));
-				date_add($today, date_interval_create_from_date_string(strval($nbJours).' days'));
-				//date_format($today, 'd-m-Y');
-				$today->format('d-m-Y');
-				$operatorformation->setDateEnd($today);
+
+				//On set la date de fin à la date du jour + le temps de validité (que l'on doit parser puisque la fonction prend un string)
+				$dateEnd = date_add($today, date_interval_create_from_date_string(strval($nbJours).' days'));
+				//On set le format
+				$dateEnd->format('d-m-Y');
+				//Puis on set la date
+				$operatorformation->setDateEnd($dateEnd);
 				//$operatorformation->setDateEnd(new \DateTime('now') + strtotime("+".$operatorformation->getFormation()->getValidityTime()." days"));
 			}
             $em = $this->getDoctrine()->getManager();

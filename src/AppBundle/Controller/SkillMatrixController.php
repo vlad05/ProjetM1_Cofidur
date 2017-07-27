@@ -11,11 +11,7 @@ class SkillMatrixController extends Controller
 
     public function skillMatrixAction(Request $request)
     {
-        /* Test avec la classe en "service"
-         *  $matrice = $this->container->get('app_cofidur.skillmatrix');
 
-        return $matrice->skillMatrix();
-        */
 		$em = $this->getDoctrine()->getManager();
 
         $form = $this->createForm(SkillMatrixType::class);
@@ -126,11 +122,37 @@ class SkillMatrixController extends Controller
 				}
             }
         }else{
-            //traitement général
+            //traitement général (c-à-d si le formulaire de tri n'a pas été utilisé)
             $formations = $em->getRepository('AppBundle:Formation')->findAll();
             $operators= $em->getRepository('AppBundle:User')->findAll();
             $operatorsformations= $em->getRepository('AppBundle:OperatorFormation')->findAll();
             $allConnexions= [];
+
+			/* ************* */
+			/* Ces deux foreach font passer la FFO en "validé" si toutes les catégories sont validées
+			 * (si les dates de signature de chaque catégories sont non-nulles)
+			*/
+
+			foreach($operatorsformations as $ffo) {
+				$valid = 1; //Variable servant à détecter que toutes les catégories sont bien validées. Si une seule ne l'est pas, on passe la variable à 0
+				$operatorCats = $ffo->getOperatorcategories();
+				if($operatorCats != null) {
+					foreach($operatorCats as $operatorCat) {
+						if($operatorCat != null) {
+							if($operatorCat->getDateSignature() == null)
+							{ //Si une date est null (c-à-d qu'une catégorie n'est pas validée) alors on passe $valid à 0 (pour ne pas passer la FFO en "validée")
+								$valid = 0;
+							}
+						}
+					}
+					if($valid == 1) {	//Si $valid est toujours égale à 1 alors on set la validation à "Validée" : NE PAS OUBLIER DE PERSIST/FLUSH pour rentrer les changements en BDD
+						$ffo->setValidation(4);
+						$em->persist($ffo);
+					}
+				}
+			}
+			$em->flush();
+			/* ************* */
 
             $nbOperatorFormations = count($operatorsformations);
             for ($i= 0; $i < $nbOperatorFormations; ++$i) {
@@ -154,7 +176,7 @@ class SkillMatrixController extends Controller
 		$operatorformationRetrogradation = $em->getRepository('AppBundle:OperatorFormation')->findAll();
 		foreach($operatorformationRetrogradation as $operatorformationRetro) {
 			if($operatorformationRetro->isInvalidated()) {
-				$operatorformationRetro->setValidation(6);
+				$operatorformationRetro->setValidation(6);	//Statut "Rétrogradé"
 			}
 		}
 

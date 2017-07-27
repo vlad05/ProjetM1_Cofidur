@@ -1,0 +1,30 @@
+{% extends 'AppBundle::Page/Formation/formation.html.twig' %}
+
+{% block body %}
+    <h1>Ajout d'un tuteur</h1>
+
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+</br></br></br>
+	<table class="category_page">
+		<th class="entete_category">Liste des tuteurs actuels de cette formation</th>
+		<tr>
+				<td>
+					{% if formation.tuteur is empty %}
+						Il n'y a aucun tuteur pour cette formation
+					{% else %}
+						{% for tuteur in formation.tuteur %}
+							{{ tuteur.lastNameFirstName }}  </br>
+						{% endfor %}
+					{% endif %}
+				</td>
+		</tr>
+	</table>
+{% endblock %}
+
+{% block sidebar_nav %}
+    <h2><em><a href="javascript:history.go(-1)">Retour</a></em></h2>
+    {{ parent() }}
+{% endblock %}

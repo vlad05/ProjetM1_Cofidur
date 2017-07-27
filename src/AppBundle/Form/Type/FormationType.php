@@ -5,7 +5,7 @@ namespace AppBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -38,6 +38,12 @@ class FormationType extends AbstractType
                         3 => '3',
                         4 => '4',
                     ),
+                )
+            )
+            ->add('tuteur', EntityType::class,
+                array(
+                   'class'  => 'AppBundle:User', 'choice_label' => 'lastNameFirstName',
+                   'label_format' => 'formation.tutors',
                 )
             )
             ->add('save', SubmitType::class, ['label_format' => 'formation.save.submit']);

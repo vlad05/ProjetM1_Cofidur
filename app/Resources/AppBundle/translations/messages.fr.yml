@@ -69,8 +69,10 @@ formation:
     sector: 'Secteur'
     validityTime: 'Temps de validité (en jours)'
     criticality: 'Criticité'
+    tutors: 'Tuteur'
     save:
         submit: 'Enregistrer la formation'
+        submitAndAdd: 'Créer et ajouter un autre'
     edit:
         submit: 'Mettre à jour la formation'
     add:
