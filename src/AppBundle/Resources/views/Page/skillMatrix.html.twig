@@ -16,7 +16,8 @@
     </script>
 
 
-	<a href="{{ path('AppBundle_skillMatrix_export') }}"> Exporter la matrice </a>
+	{#<a href="{{ path('AppBundle_skillMatrix_export') }}"> Exporter la matrice </a>#}
+	<input value="Exporter la matrice" onclick="{window.location.href='{{ path('AppBundle_skillMatrix_export') }}'}">
 
 
 	<h1>Matrice des compétences opérateurs</h1>
