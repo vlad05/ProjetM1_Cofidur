@@ -13,13 +13,13 @@ use AppBundle\Services\HistorisationSkillMatrixService;
 
 class SkillMatrixExportController extends Controller
 {
+	//essai de service
+//	public function skillMatrixExpAction(/*HistorisationSkillMatrixService $service*/) {
+//		//$response = $service->skillMatrix();
+//		return $this->container->get('app_cofidur.historisationskillmatrix');
+//	}
 
-	public function skillMatrixExpAction(/*HistorisationSkillMatrixService $service*/) {
-		//$response = $service->skillMatrix();
-		return $this->container->get('app_cofidur.historisationskillmatrix');
-	}
-
-    public function skillMatrixExportAction(Request $request)
+    public function SkillMatrixExportAction(Request $request)
     {
 		//"Import" du code depuis skillMatrixController.php : c'est du copié-collé mais ça serait mieux de faire un service
 		/*******************/
