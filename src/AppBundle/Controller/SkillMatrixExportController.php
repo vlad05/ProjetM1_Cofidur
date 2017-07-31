@@ -19,7 +19,7 @@ class SkillMatrixExportController extends Controller
 //		return $this->container->get('app_cofidur.historisationskillmatrix');
 //	}
 
-    public function SkillMatrixExportAction(Request $request)
+    public function skillMatrixExportAction(Request $request)
     {
 		//"Import" du code depuis skillMatrixController.php : c'est du copié-collé mais ça serait mieux de faire un service
 		/*******************/
